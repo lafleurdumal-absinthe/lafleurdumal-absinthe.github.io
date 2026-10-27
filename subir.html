@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Bodega · Las flores del mal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+SC:wght@500;600&display=swap">
+<style>
+/* Panel privado de la librería: blanco, tinta negra y vino, como la página pública. */
+:root{
+  --papel:#ffffff;--papel-2:#f6f3f2;--tinta:#141012;--gris:#5d5458;--vino:#8b0f1e;--vino-2:#b0182c;--linea:#e4dcdc;--ok:#3d6b2a;
+  --gotica:"Grenze Gotisch",Georgia,serif;--body:"EB Garamond",Georgia,serif;--sc:"Cormorant SC",Georgia,serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papel-2);color:var(--tinta);font-family:var(--body);font-size:1.08rem;line-height:1.55}
+.wrap{max-width:52rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{background:var(--tinta);color:#fff}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-block:.8rem;flex-wrap:wrap}
+header h1{font-family:var(--gotica);font-weight:400;font-size:1.7rem;margin:0;color:#ff9aa6}
+header a{font-family:var(--sc);letter-spacing:.14em;color:#fff;text-decoration:none;font-size:.95rem}
+main{padding-block:1.5rem 4rem;display:flex;flex-direction:column;gap:1.5rem}
+.card{background:var(--papel);border:1px solid var(--linea);padding:clamp(1rem,3vw,1.75rem)}
+h2{font-family:var(--gotica);font-weight:400;color:var(--vino);font-size:1.9rem;margin:0 0 .3rem}
+.hint{color:var(--gris);margin:0 0 1rem;font-size:1rem}
+label{display:flex;flex-direction:column;gap:.25rem}
+label>span{font-family:var(--sc);letter-spacing:.12em;color:var(--gris);font-size:.95rem;text-transform:lowercase}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--tinta);background:#fff;border:1px solid #cfc5c5;padding:.6rem .7rem;width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--vino)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem 1.1rem}
+.full{grid-column:1/-1}
+@media (max-width:560px){.grid{grid-template-columns:minmax(0,1fr)}}
+.photo{display:grid;grid-template-columns:minmax(0,9rem) minmax(0,1fr);gap:1rem;align-items:center;margin-bottom:1rem}
+@media (max-width:420px){.photo{grid-template-columns:minmax(0,1fr)}}
+.drop{aspect-ratio:3/4;border:2px dashed var(--vino);background:var(--papel-2);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--vino);cursor:pointer;position:relative;overflow:hidden;font-family:var(--gotica);font-size:1.4rem;max-width:100%}
+.drop img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.btn{font-family:var(--sc);letter-spacing:.12em;text-transform:lowercase;font-size:1.05rem;background:#fff;color:var(--tinta);border:1px solid var(--tinta);padding:.5rem 1.1rem;cursor:pointer}
+.btn:hover{background:var(--tinta);color:#fff}
+.btn.vino{background:var(--vino);border-color:var(--vino);color:#fff}
+.btn.vino:hover{background:var(--vino-2)}
+.btn.small{font-size:.92rem;padding:.2rem .65rem}
+.btn.borrar{color:var(--vino);border-color:var(--vino)}
+.btn:disabled{opacity:.5;cursor:wait}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-top:1.1rem}
+.msg{font-style:italic;color:var(--gris)}
+.msg.err{color:var(--vino)}
+.msg.ok{color:var(--ok)}
+.status{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.pill{font-family:var(--sc);letter-spacing:.1em;padding:.1rem .6rem;border:1px solid var(--ok);color:var(--ok)}
+.list{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:3.5rem minmax(0,1fr) auto;gap:.9rem;align-items:center;padding:.7rem 0;border-top:1px solid var(--linea)}
+.row img,.row .noimg{width:3.5rem;aspect-ratio:3/4;object-fit:cover;background:var(--papel-2);border:1px solid var(--linea)}
+.row .t{font-weight:600;line-height:1.2}
+.row .s{color:var(--gris);font-size:.95rem}
+.row .ctl{display:flex;flex-direction:column;gap:.35rem;align-items:flex-end}
+.row select{width:auto;padding:.25rem .4rem;font-size:.95rem}
+@media (max-width:480px){.row{grid-template-columns:3rem minmax(0,1fr)}.row .ctl{grid-column:1/-1;flex-direction:row;justify-content:flex-end}}
+.steps{margin:.3rem 0 1rem;padding-left:1.2rem;color:var(--gris);font-size:1rem}
+code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>La bodega</h1><a href="./" target="_blank" rel="noopener">ver la página pública ↗</a></div></header>
+<main class="wrap">
+
+  <section class="card" id="llave">
+    <h2>Llave de acceso</h2>
+    <div id="sin-llave">
+      <p class="hint">Esta página guarda los libros directamente en su página de GitHub. Para eso necesita una llave. Se pone una sola vez en cada teléfono o computadora.</p>
+      <ol class="steps">
+        <li>En GitHub, entra a <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens</b> y pulsa <b>Generate new token</b>.</li>
+        <li>Ponle un nombre (por ejemplo "bodega"), en <b>Repository access</b> elige <i>Only select repositories</i> y escoge <code>lafleurdumal-absinthe.github.io</code>.</li>
+        <li>En <b>Permissions → Contents</b> elige <b>Read and write</b>. Pulsa <b>Generate token</b> y copia la llave.</li>
+      </ol>
+      <label><span>llave de github</span><input id="token" type="password" autocomplete="off" placeholder="github_pat_…"></label>
+      <div class="actions"><button class="btn vino" id="guardar-llave" type="button">Guardar en este dispositivo</button><span class="msg" id="msg-llave" role="status"></span></div>
+    </div>
+    <div id="con-llave" hidden>
+      <div class="status"><span class="pill">conectado</span><span class="msg">Este dispositivo ya puede subir libros.</span><button class="btn small" id="olvidar" type="button">Quitar llave</button></div>
+    </div>
+  </section>
+
+  <section class="card" id="nuevo">
+    <h2 id="form-titulo">Subir un libro</h2>
+    <p class="hint">Toma la foto, llena lo básico y publica. Aparece en la página pública en uno o dos minutos.</p>
+    <div class="photo">
+      <div class="drop" id="drop" role="button" tabindex="0" aria-label="Elegir foto del libro">Foto</div>
+      <div><input id="foto" type="file" accept="image/*" hidden><p class="hint" style="margin:0">Toca el recuadro para tomar o elegir la foto de la portada.</p></div>
+    </div>
+    <div class="grid">
+      <label class="full"><span>título</span><input id="titulo" maxlength="200" autocomplete="off"></label>
+      <label><span>autor</span><input id="autor" maxlength="160" autocomplete="off"></label>
+      <label><span>editorial</span><input id="editorial" maxlength="120" autocomplete="off"></label>
+      <label><span>precio (mxn)</span><input id="precio" type="number" min="0" step="1" inputmode="numeric" placeholder="Vacío = precio a consultar"></label>
+      <label><span>género</span><select id="genero"><option>Poesía</option><option>Novela</option><option>Cuento</option><option>Ensayo y teoría</option><option>Historia</option><option>Otros</option></select></label>
+      <label><span>estado</span><select id="estado"><option value="disponible">Disponible</option><option value="apartado">Apartado</option><option value="vendido">Vendido</option></select></label>
+      <label><span>nota</span><input id="nota" maxlength="300" placeholder="Primera edición, buen estado…"></label>
+    </div>
+    <div class="actions">
+      <button class="btn vino" id="publicar" type="button">Publicar libro</button>
+      <button class="btn" id="cancelar" type="button" hidden>Cancelar edición</button>
+      <span class="msg" id="msg" role="status"></span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>En la vitrina</h2>
+    <p class="hint">Cambia el estado cuando aparten o vendan un libro. Los vendidos siguen visibles en gris; bórralos cuando ya no quieras mostrarlos.</p>
+    <div class="list" id="lista"><p class="msg">Cargando…</p></div>
+  </section>
+</main>
+
+<script>
+(function(){
+  const OWNER='lafleurdumal-absinthe', REPO='lafleurdumal-absinthe.github.io', BRANCH='main';
+  const API='https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/';
+  const $=id=>document.getElementById(id);
+  let token='', libros=[], sha=null, file=null, editing=null, confirmar=null;
+
+  function getTok(){try{return localStorage.getItem('fdm_token')||'';}catch(e){return '';}}
+  function setTok(t){try{t?localStorage.setItem('fdm_token',t):localStorage.removeItem('fdm_token');}catch(e){}}
+  function showKey(){const ok=!!token;$('sin-llave').hidden=ok;$('con-llave').hidden=!ok;}
+  token=getTok();showKey();
+
+  const b64=s=>{const bytes=new TextEncoder().encode(s);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin);};
+  const unb64=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\n/g,'')),c=>c.charCodeAt(0)));
+  const hdr=()=>({'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'});
+  const slug=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,50)||'libro';
+
+  async function api(path,opts){const r=await fetch(API+path+(opts&&opts.method?'':'?ref='+BRANCH+'&t='+Date.now()),Object.assign({headers:hdr(),cache:'no-store'},opts||{}));
+    if(r.status===401||r.status===403)throw{code:'llave'};if(r.status===404&&!(opts&&opts.method))return null;if(!r.ok)throw{code:'red',status:r.status};return r.status===204?null:r.json();}
+
+  async function cargar(){
+    if(token){const f=await api('libros.json');if(f){sha=f.sha;const d=JSON.parse(unb64(f.content));libros=Array.isArray(d)?d:(d.libros||[]);}else{sha=null;libros=[];}}
+    else{try{const r=await fetch('libros.json?t='+Date.now(),{cache:'no-store'});const d=r.ok?await r.json():[];libros=Array.isArray(d)?d:(d.libros||[]);}catch(e){libros=[];}}
+    pintar();
+  }
+  async function guardarLista(msg){
+    const body={message:msg,content:b64(JSON.stringify({libros},null,2)),branch:BRANCH};if(sha)body.sha=sha;
+    const r=await api('libros.json',{method:'PUT',headers:Object.assign(hdr(),{'Content-Type':'application/json'}),body:JSON.stringify(body)});
+    sha=r.content.sha;
+  }
+
+  function pintar(){
+    const L=$('lista');L.textContent='';
+    if(!libros.length){const p=document.createElement('p');p.className='msg';p.textContent='Todavía no hay libros. Sube el primero arriba.';L.appendChild(p);return;}
+    [...libros].sort((a,b)=>(b.creado||0)-(a.creado||0)).forEach(b=>{
+      const row=document.createElement('div');row.className='row';
+      if(b.foto){const i=new Image();i.src=b.foto;i.alt='';row.appendChild(i);}else{const n=document.createElement('div');n.className='noimg';row.appendChild(n);}
+      const info=document.createElement('div');const t=document.createElement('div');t.className='t';t.textContent=b.titulo;
+      const s=document.createElement('div');s.className='s';s.textContent=[b.autor,b.editorial,(b.precio!=null&&b.precio!=='')?'$'+b.precio:'precio a consultar'].filter(Boolean).join(' · ');
+      info.append(t,s);row.appendChild(info);
+      const ctl=document.createElement('div');ctl.className='ctl';
+      const sel=document.createElement('select');sel.setAttribute('aria-label','Estado de '+b.titulo);
+      ['disponible','apartado','vendido'].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v[0].toUpperCase()+v.slice(1);if((b.estado||'disponible')===v)o.selected=true;sel.appendChild(o);});
+      sel.onchange=()=>accion(async()=>{b.estado=sel.value;await guardarLista('Estado: '+b.titulo+' → '+sel.value);},'Estado actualizado.');
+      const ed=document.createElement('button');ed.className='btn small';ed.type='button';ed.textContent='editar';ed.onclick=()=>editar(b);
+      const del=document.createElement('button');del.className='btn small borrar';del.type='button';del.textContent=confirmar===b.id?'¿seguro? borrar':'borrar';
+      del.onclick=()=>{if(confirmar!==b.id){confirmar=b.id;pintar();return;}confirmar=null;
+        accion(async()=>{libros=libros.filter(x=>x.id!==b.id);await guardarLista('Borrado: '+b.titulo);},'Libro borrado.');};
+      ctl.append(sel,ed,del);row.appendChild(ctl);L.appendChild(row);
+    });
+  }
+
+  function say(t,k){const m=$('msg');m.textContent=t;m.className='msg'+(k?' '+k:'');}
+  async function accion(fn,okMsg){
+    if(!token){say('Primero guarda la llave de acceso arriba.','err');$('llave').scrollIntoView({behavior:'smooth'});return;}
+    try{await fn();say(okMsg+' Se verá en la página pública en uno o dos minutos.','ok');}
+    catch(e){if(e&&e.code==='llave')say('La llave no funciona o venció. Quítala y pon una nueva.','err');
+      else if(e&&e.status===409)say('Alguien más guardó un cambio al mismo tiempo. Recarga la página e intenta de nuevo.','err');
+      else say('No se pudo guardar. Revisa tu conexión e intenta de nuevo.','err');
+      try{await cargar();}catch(_){}}
+    pintar();
+  }
+
+  // Foto
+  const drop=$('drop');
+  function preview(src){drop.querySelectorAll('img').forEach(i=>i.remove());if(src){const i=new Image();i.src=src;i.alt='';drop.appendChild(i);}}
+  drop.onclick=()=>$('foto').click();
+  drop.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('foto').click();}};
+  $('foto').onchange=e=>{const f=e.target.files[0];if(!f)return;file=f;preview(URL.createObjectURL(f));};
+  function reducir(f){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(f);
+    img.onload=()=>{const m=1200,k=Math.min(1,m/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.85).split(',')[1]);};
+    img.onerror=()=>{URL.revokeObjectURL(u);rej({code:'foto'});};img.src=u;});}
+
+  function editar(b){editing=b;file=null;$('form-titulo').textContent='Editar «'+b.titulo+'»';
+    ['titulo','autor','editorial','nota'].forEach(k=>$(k).value=b[k]||'');$('precio').value=b.precio??'';$('genero').value=b.genero||'Otros';$('estado').value=b.estado||'disponible';
+    preview(b.foto||null);$('cancelar').hidden=false;$('publicar').textContent='Guardar cambios';say('');$('nuevo').scrollIntoView({behavior:'smooth'});}
+  function limpiar(){editing=null;file=null;['titulo','autor','editorial','nota','precio'].forEach(k=>$(k).value='');$('foto').value='';preview(null);
+    $('form-titulo').textContent='Subir un libro';$('cancelar').hidden=true;$('publicar').textContent='Publicar libro';}
+  $('cancelar').onclick=()=>{limpiar();say('');};
+
+  $('publicar').onclick=async()=>{
+    const titulo=$('titulo').value.trim();if(!titulo){say('Escribe al menos el título.','err');$('titulo').focus();return;}
+    const btn=$('publicar');btn.disabled=true;say('Guardando…');
+    await accion(async()=>{
+      const pr=$('precio').value;
+      const d={id:editing?editing.id:Date.now().toString(36),titulo,autor:$('autor').value.trim(),editorial:$('editorial').value.trim(),
+        precio:pr===''?null:Number(pr),genero:$('genero').value,estado:$('estado').value,nota:$('nota').value.trim(),
+        foto:editing?editing.foto||'':'',creado:editing?editing.creado:Date.now()};
+      if(file){say('Subiendo foto…');const data=await reducir(file);const name='fotos/'+slug(titulo)+'-'+Date.now().toString(36)+'.jpg';
+        await api(name,{method:'PUT',headers:Object.assign(hdr(),{'Content-Type':'application/json'}),body:JSON.stringify({message:'Foto: '+titulo,content:data,branch:BRANCH})});d.foto=name;}
+      say('Guardando datos…');await cargar();
+      if(editing){libros=libros.map(x=>x.id===d.id?d:x);}else{libros.push(d);}
+      await guardarLista((editing?'Editado: ':'Nuevo: ')+titulo);limpiar();
+    },editing?'Cambios guardados.':'Libro publicado.');
+    btn.disabled=false;
+  };
+
+  $('guardar-llave').onclick=async()=>{const t=$('token').value.trim();if(!t){$('msg-llave').textContent='Pega la llave primero.';return;}
+    token=t;$('msg-llave').textContent='Probando…';
+    try{const r=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO,{headers:hdr()});if(!r.ok)throw 0;const j=await r.json();
+      if(!(j.permissions&&j.permissions.push))throw 0;setTok(t);$('token').value='';showKey();await cargar();}
+    catch(e){token='';$('msg-llave').textContent='Esa llave no tiene permiso de escritura en el repositorio. Revisa los pasos.';}};
+  $('olvidar').onclick=()=>{setTok('');token='';showKey();};
+
+  cargar().catch(()=>{$('lista').textContent='No se pudo cargar la lista. Recarga la página.';});
+})();
+</script>
+</body>
+</html>

@@ -348,18 +348,14 @@ footer .sc{display:block;margin-top:.5rem;font-size:.95rem}
       grid.appendChild(card);});
   }
 
-  const url=csvUrl(SHEET_URL);
-  if(!url){$('empty').textContent='Pronto subiremos nuestros libros. Mientras tanto, escríbenos por WhatsApp o Instagram.';return;}
-  fetch(url,{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.text();}).then(t=>{
-    const rows=parseCSV(t).filter(r=>r.some(c=>norm(c)));if(!rows.length){render();return;}
-    const h=rows[0].map(low);const col=k=>h.findIndex(x=>x.startsWith(k));
-    const ix={titulo:col('titulo'),autor:col('autor'),editorial:col('editorial'),precio:col('precio'),genero:col('genero'),estado:col('estado'),nota:col('nota'),foto:col('foto')};
-    const g=(r,k)=>ix[k]>=0?norm(r[ix[k]]):'';
-    books=rows.slice(1).map(r=>{const p=g(r,'precio').replace(/[^\d.]/g,'');return{titulo:g(r,'titulo'),autor:g(r,'autor'),editorial:g(r,'editorial'),
-      precio:p?Number(p):null,genero:genero(g(r,'genero')),estado:estado(g(r,'estado')),nota:g(r,'nota'),foto:foto(g(r,'foto'))};})
-      .filter(b=>b.titulo&&!/^ejemplo/i.test(b.titulo)).reverse();
+  fetch('libros.json?t='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json();}).then(d=>{
+    const arr=Array.isArray(d)?d:(d.libros||[]);
+    books=arr.map(b=>({titulo:norm(b.titulo),autor:norm(b.autor),editorial:norm(b.editorial),
+      precio:(b.precio===''||b.precio==null||isNaN(Number(b.precio)))?null:Number(b.precio),
+      genero:genero(b.genero),estado:estado(b.estado),nota:norm(b.nota),foto:norm(b.foto),creado:b.creado||0}))
+      .filter(b=>b.titulo).sort((a,b)=>b.creado-a.creado);
     render();
-  }).catch(()=>{$('empty').hidden=false;$('empty').textContent='No se pudo cargar el catálogo. Recarga la página o escríbenos por WhatsApp.';});
+  }).catch(()=>{books=[];render();});
 })();
 </script>
 

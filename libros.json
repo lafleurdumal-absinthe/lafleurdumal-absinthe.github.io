@@ -1,0 +1,16 @@
+{
+  "libros": [
+    {
+      "id": "fdm-akal",
+      "titulo": "Las flores del mal",
+      "autor": "Charles Baudelaire",
+      "editorial": "Akal",
+      "precio": null,
+      "genero": "Poesía",
+      "estado": "disponible",
+      "nota": "Colección Básica de Bolsillo",
+      "foto": "fotos/las-flores-del-mal-akal.jpg",
+      "creado": 1793092857671
+    }
+  ]
+}
