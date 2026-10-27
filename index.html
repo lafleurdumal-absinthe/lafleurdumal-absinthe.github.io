@@ -327,7 +327,7 @@ window.__AMAPOLAS__=["data:image/webp;base64,UklGRk4gAABXRUJQVlA4WAoAAAAQAAAAVgA
   // Pega aquí el enlace de la hoja de Google (compartida como "Cualquier persona con el enlace: lector").
   const SHEET_URL = "SHEET_URL_AQUI";
   const WA = "https://wa.me/525519484038";
-  const GENEROS=["Todos","Poesía","Novela","Cuento","Ensayo y teoría","Historia","Otros"];
+  const GENEROS=["Todos","Poesía","Novela","Cuento","Ensayo","Teoría crítica","Feminismo y literatura de mujeres","Historia","Otros"];
   const $=id=>document.getElementById(id);
   let books=[],filtro="Todos",q="";
 
@@ -344,7 +344,7 @@ window.__AMAPOLAS__=["data:image/webp;base64,UklGRk4gAABXRUJQVlA4WAoAAAAQAAAAVgA
     if(/drive\.google\.com|docs\.google\.com/.test(u)){const m=u.match(/\/d\/([\w-]{10,})/)||u.match(/[?&]id=([\w-]{10,})/);if(m)return'https://drive.google.com/thumbnail?id='+m[1]+'&sz=w1000';}
     return u;}
   function estado(s){s=low(s);return s.startsWith('vend')?'vendido':s.startsWith('apart')?'apartado':'disponible';}
-  function genero(s){const t=low(s);const hit=GENEROS.find(g=>low(g)===t);return hit||(t.startsWith('ensayo')?'Ensayo y teoría':norm(s)||'Otros');}
+  function genero(s){const t=low(s);const hit=GENEROS.find(g=>low(g)===t);return hit||(t.startsWith('ensayo')?'Ensayo':t.startsWith('teoria')?'Teoría crítica':t.startsWith('femin')||t.includes('mujeres')?'Feminismo y literatura de mujeres':norm(s)||'Otros');}
 
   function parseCSV(text){const rows=[];let row=[],f='',i=0,inq=false;
     while(i<text.length){const c=text[i];
