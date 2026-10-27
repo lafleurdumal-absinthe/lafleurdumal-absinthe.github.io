@@ -271,8 +271,8 @@ footer .sc{display:block;margin-top:.5rem;font-size:.95rem}
   function size(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
   size();addEventListener('resize',size);
   const N=Math.round(Math.min(18,W/60));
-  for(let i=0;i<N;i++)P.push(mk(true));
   const REDS=['200,16,46','178,18,38','214,40,40','139,15,30'];
+  for(let i=0;i<N;i++)P.push(mk(true));
   function mk(init){const flor=Math.random()<.6;return{x:Math.random()*W,y:init?Math.random()*H:-30,flor,s:flor?7+Math.random()*7:5+Math.random()*4,vy:.3+Math.random()*.55,vx:-.2+Math.random()*.4,r:Math.random()*6.28,vr:-.015+Math.random()*.03,ph:Math.random()*6.28,c:REDS[Math.floor(Math.random()*REDS.length)],a:.7+Math.random()*.3};}
   function petal(s,c,a){ctx.fillStyle='rgba('+c+','+a+')';ctx.beginPath();ctx.moveTo(0,0);ctx.bezierCurveTo(-s*.9,-s*.25,-s*.85,-s*1.15,0,-s*1.1);ctx.bezierCurveTo(s*.85,-s*1.15,s*.9,-s*.25,0,0);ctx.fill();}
   function draw(p,t){ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.scale(Math.max(.25,Math.abs(Math.cos(t/1800+p.ph))),1);
