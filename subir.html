@@ -96,7 +96,7 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
       <label><span>editorial</span><input id="editorial" maxlength="120" autocomplete="off"></label>
       <label><span>precio (mxn)</span><input id="precio" type="number" min="0" step="1" inputmode="numeric" placeholder="Vacío = precio a consultar"></label>
       <label><span>género</span><select id="genero"><option>Poesía</option><option>Novela</option><option>Cuento</option><option>Ensayo</option><option>Teoría crítica</option><option>Feminismo y literatura de mujeres</option><option>Historia</option><option>Otros</option></select></label>
-      <label><span>estado</span><select id="estado"><option value="disponible">Disponible</option><option value="apartado">Apartado</option><option value="vendido">Vendido</option></select></label>
+      <label><span>estado</span><select id="estado"><option value="disponible">Disponible</option><option value="apartado">Apartado</option></select></label>
       <label><span>nota</span><input id="nota" maxlength="300" placeholder="Primera edición, buen estado…"></label>
     </div>
     <div class="actions">
@@ -108,7 +108,7 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
 
   <section class="card">
     <h2>En la vitrina</h2>
-    <p class="hint">Cambia el estado cuando aparten o vendan un libro. Los vendidos siguen visibles en gris; bórralos cuando ya no quieras mostrarlos.</p>
+    <p class="hint">Cambia a "apartado" cuando alguien lo pida. Cuando se venda, pulsa <b>vendido</b>: el libro se retira de la página pública.</p>
     <div class="list" id="lista"><p class="msg">Cargando…</p></div>
   </section>
 </main>
@@ -155,13 +155,16 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
       info.append(t,s);row.appendChild(info);
       const ctl=document.createElement('div');ctl.className='ctl';
       const sel=document.createElement('select');sel.setAttribute('aria-label','Estado de '+b.titulo);
-      ['disponible','apartado','vendido'].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v[0].toUpperCase()+v.slice(1);if((b.estado||'disponible')===v)o.selected=true;sel.appendChild(o);});
+      ['disponible','apartado'].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v[0].toUpperCase()+v.slice(1);if((b.estado||'disponible')===v)o.selected=true;sel.appendChild(o);});
       sel.onchange=()=>accion(async()=>{b.estado=sel.value;await guardarLista('Estado: '+b.titulo+' → '+sel.value);},'Estado actualizado.');
       const ed=document.createElement('button');ed.className='btn small';ed.type='button';ed.textContent='editar';ed.onclick=()=>editar(b);
+      const ven=document.createElement('button');ven.className='btn small vino';ven.type='button';ven.textContent=confirmar==='v'+b.id?'¿se vendió? sí':'vendido';
+      ven.onclick=()=>{if(confirmar!=='v'+b.id){confirmar='v'+b.id;pintar();return;}confirmar=null;
+        accion(async()=>{libros=libros.filter(x=>x.id!==b.id);await guardarLista('Vendido: '+b.titulo);},'Vendido. Se retiró de la vitrina.');};
       const del=document.createElement('button');del.className='btn small borrar';del.type='button';del.textContent=confirmar===b.id?'¿seguro? borrar':'borrar';
       del.onclick=()=>{if(confirmar!==b.id){confirmar=b.id;pintar();return;}confirmar=null;
         accion(async()=>{libros=libros.filter(x=>x.id!==b.id);await guardarLista('Borrado: '+b.titulo);},'Libro borrado.');};
-      ctl.append(sel,ed,del);row.appendChild(ctl);L.appendChild(row);
+      ctl.append(sel,ven,ed,del);row.appendChild(ctl);L.appendChild(row);
     });
   }
 
