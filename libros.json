@@ -11,6 +11,18 @@
       "nota": "",
       "foto": "fotos/cuentos-completos-mvqhz9i4.jpg",
       "creado": 1793094086828
+    },
+    {
+      "id": "mvraalzn",
+      "titulo": "Fascismo Cosplay",
+      "autor": "Luis Ignacio Garcia",
+      "editorial": "Editorial Caja Negra",
+      "precio": 400,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/fascismo-cosplay-mvraam05.jpg",
+      "creado": 1793141740499
     }
   ]
 }
