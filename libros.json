@@ -11,6 +11,18 @@
       "nota": "Colección Básica de Bolsillo",
       "foto": "fotos/las-flores-del-mal-akal.jpg",
       "creado": 1793092857671
+    },
+    {
+      "id": "mvqhx86k",
+      "titulo": "Cuentos completos",
+      "autor": "Edgar Allan Poe",
+      "editorial": "Penguin clásicos",
+      "precio": 400,
+      "genero": "Cuento",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/cuentos-completos-mvqhx86x.jpg",
+      "creado": 1793094086828
     }
   ]
 }
