@@ -35,6 +35,18 @@
       "nota": "",
       "foto": "fotos/los-muertos-indociles-necroescrituras-y-desapropia-mvrizcx9.jpg",
       "creado": 1793156332057
+    },
+    {
+      "id": "mvrjbw7t",
+      "titulo": "Jane Eyre",
+      "autor": "Charlotte Brontë",
+      "editorial": "Clásicos B",
+      "precio": 250,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/jane-eyre-mvrjbw85.jpg",
+      "creado": 1793156916954
     }
   ]
 }
