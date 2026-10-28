@@ -179,6 +179,18 @@
       "nota": "",
       "foto": "fotos/el-dinero-mvrl613k.jpg",
       "creado": 1793160002542
+    },
+    {
+      "id": "mvrlc0ss",
+      "titulo": "El arte de la guerra",
+      "autor": "Sun Tzu",
+      "editorial": "Penguin clásicos",
+      "precio": 150,
+      "genero": "Ensayo",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/el-arte-de-la-guerra-mvrlc0vt.jpg",
+      "creado": 1793160282125
     }
   ]
 }
