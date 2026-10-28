@@ -131,6 +131,18 @@
       "nota": "",
       "foto": "fotos/fahrenheit-451-mvrkgf9y.jpg",
       "creado": 1793158807884
+    },
+    {
+      "id": "mvrkm4qs",
+      "titulo": "Así habló Zaratustra",
+      "autor": "Friedrich Nietzsche",
+      "editorial": "Penguin clásicos",
+      "precio": 300,
+      "genero": "Otros",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/asi-hablo-zaratustra-mvrkm4rb.jpg",
+      "creado": 1793159074180
     }
   ]
 }
