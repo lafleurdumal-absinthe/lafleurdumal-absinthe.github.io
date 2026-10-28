@@ -143,6 +143,18 @@
       "nota": "",
       "foto": "fotos/asi-hablo-zaratustra-mvrkm4rb.jpg",
       "creado": 1793159074180
+    },
+    {
+      "id": "mvrkvo88",
+      "titulo": "La juguetería mágica",
+      "autor": "Angela Carter",
+      "editorial": "Sexto Piso",
+      "precio": 460,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/la-jugueteria-magica-mvrkvo9r.jpg",
+      "creado": 1793159519336
     }
   ]
 }
