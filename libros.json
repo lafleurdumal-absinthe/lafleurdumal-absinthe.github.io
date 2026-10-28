@@ -167,6 +167,18 @@
       "nota": "",
       "foto": "fotos/libro-de-la-vida-mvrl2ovg.jpg",
       "creado": 1793159846693
+    },
+    {
+      "id": "mvrl612m",
+      "titulo": "El dinero",
+      "autor": "Émile Zola",
+      "editorial": "Penguin clásicos",
+      "precio": 150,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/el-dinero-mvrl613k.jpg",
+      "creado": 1793160002542
     }
   ]
 }
