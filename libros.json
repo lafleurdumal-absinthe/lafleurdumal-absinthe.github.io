@@ -287,6 +287,18 @@
       "nota": "",
       "foto": "fotos/de-las-mujeres-mvrmeqrc.jpg",
       "creado": 1793162088673
+    },
+    {
+      "id": "mvrms1br",
+      "titulo": "El amante del volcán",
+      "autor": "Susan Sontag",
+      "editorial": "Debolsillo",
+      "precio": 180,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/el-amante-del-volcan-mvrms1cq.jpg",
+      "creado": 1793162708920
     }
   ]
 }
