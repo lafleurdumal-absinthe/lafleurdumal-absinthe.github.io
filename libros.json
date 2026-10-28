@@ -95,6 +95,18 @@
       "nota": "",
       "foto": "fotos/berta-isla-mvrk063g.jpg",
       "creado": 1793158049468
+    },
+    {
+      "id": "mvrk6poe",
+      "titulo": "Emma",
+      "autor": "Jane Austen",
+      "editorial": "Penguin clásicos",
+      "precio": 300,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/emma-mvrk6ppp.jpg",
+      "creado": 1793158354814
     }
   ]
 }
