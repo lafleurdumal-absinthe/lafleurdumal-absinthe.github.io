@@ -155,6 +155,18 @@
       "nota": "",
       "foto": "fotos/la-jugueteria-magica-mvrkvo9r.jpg",
       "creado": 1793159519336
+    },
+    {
+      "id": "mvrl2oth",
+      "titulo": "Libro de la vida",
+      "autor": "Santa Teresa de Jesús",
+      "editorial": "Penguin clásicos",
+      "precio": 300,
+      "genero": "Ensayo",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/libro-de-la-vida-mvrl2ovg.jpg",
+      "creado": 1793159846693
     }
   ]
 }
