@@ -203,6 +203,18 @@
       "nota": "",
       "foto": "fotos/alicia-en-el-pais-de-las-maravillas-mvrlgx8k.jpg",
       "creado": 1793160510643
+    },
+    {
+      "id": "mvrlm095",
+      "titulo": "El sefardí romántico",
+      "autor": "Angelina Muñiz-Huberman",
+      "editorial": "Debolsillo",
+      "precio": 170,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/el-sefardi-romantico-mvrlm09l.jpg",
+      "creado": 1793160747977
     }
   ]
 }
