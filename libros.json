@@ -71,6 +71,18 @@
       "nota": "",
       "foto": "fotos/el-aleph-mvrjohgc.jpg",
       "creado": 1793157504300
+    },
+    {
+      "id": "mvrjw3xz",
+      "titulo": "En un lugar solitario",
+      "autor": "Enrique Vila-Matas",
+      "editorial": "Debolsillo",
+      "precio": 350,
+      "genero": "Cuento",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/en-un-lugar-solitario-mvrjw3zi.jpg",
+      "creado": 1793157860087
     }
   ]
 }
