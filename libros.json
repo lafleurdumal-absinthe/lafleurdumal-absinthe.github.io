@@ -227,6 +227,18 @@
       "nota": "",
       "foto": "fotos/el-mal-de-portnoy-mvrlqmim.jpg",
       "creado": 1793160963448
+    },
+    {
+      "id": "mvrlvb2r",
+      "titulo": "Ensayos",
+      "autor": "Marguerite Yourcenar",
+      "editorial": "Debolsillo",
+      "precio": 300,
+      "genero": "Ensayo",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/ensayos-mvrlvb3j.jpg",
+      "creado": 1793161181907
     }
   ]
 }
