@@ -239,6 +239,18 @@
       "nota": "",
       "foto": "fotos/ensayos-mvrlvb3j.jpg",
       "creado": 1793161181907
+    },
+    {
+      "id": "mvrm2aq4",
+      "titulo": "Cuentos escogidos",
+      "autor": "Camilo José Cela",
+      "editorial": "Debolsillo",
+      "precio": 300,
+      "genero": "Cuento",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/cuentos-escogidos-mvrm2aqq.jpg",
+      "creado": 1793161508044
     }
   ]
 }
