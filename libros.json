@@ -215,6 +215,18 @@
       "nota": "",
       "foto": "fotos/el-sefardi-romantico-mvrlm09l.jpg",
       "creado": 1793160747977
+    },
+    {
+      "id": "mvrlqmig",
+      "titulo": "El mal de Portnoy",
+      "autor": "Philip Roth",
+      "editorial": "Debolsillo",
+      "precio": 250,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/el-mal-de-portnoy-mvrlqmim.jpg",
+      "creado": 1793160963448
     }
   ]
 }
