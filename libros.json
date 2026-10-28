@@ -191,6 +191,18 @@
       "nota": "",
       "foto": "fotos/el-arte-de-la-guerra-mvrlc0vt.jpg",
       "creado": 1793160282125
+    },
+    {
+      "id": "mvrlgx4j",
+      "titulo": "Alicia en el país de las maravillas",
+      "autor": "Lewis Carroll",
+      "editorial": "Penguin Clásicos",
+      "precio": 180,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/alicia-en-el-pais-de-las-maravillas-mvrlgx8k.jpg",
+      "creado": 1793160510643
     }
   ]
 }
