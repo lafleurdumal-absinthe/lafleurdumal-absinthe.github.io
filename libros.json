@@ -263,6 +263,18 @@
       "nota": "",
       "foto": "fotos/chico-zigzag-mvrm5un1.jpg",
       "creado": 1793161673784
+    },
+    {
+      "id": "mvrm8td3",
+      "titulo": "A la intemperie",
+      "autor": "Roberto Bolaño",
+      "editorial": "Debolsillo",
+      "precio": 300,
+      "genero": "Ensayo",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/a-la-intemperie-mvrm8tdn.jpg",
+      "creado": 1793161812135
     }
   ]
 }
