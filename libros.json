@@ -83,6 +83,18 @@
       "nota": "",
       "foto": "fotos/en-un-lugar-solitario-mvrjw3zi.jpg",
       "creado": 1793157860087
+    },
+    {
+      "id": "mvrk062k",
+      "titulo": "Berta Isla",
+      "autor": "Javier Marías",
+      "editorial": "Debolsillo",
+      "precio": 300,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/berta-isla-mvrk063g.jpg",
+      "creado": 1793158049468
     }
   ]
 }
