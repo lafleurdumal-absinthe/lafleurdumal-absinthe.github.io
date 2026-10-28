@@ -119,6 +119,18 @@
       "nota": "",
       "foto": "fotos/el-retrato-de-dorian-gray-mvrkch30.jpg",
       "creado": 1793158623580
+    },
+    {
+      "id": "mvrkgf9o",
+      "titulo": "Fahrenheit 451",
+      "autor": "Ray Bradbury",
+      "editorial": "Debolsillo",
+      "precio": 250,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/fahrenheit-451-mvrkgf9y.jpg",
+      "creado": 1793158807884
     }
   ]
 }
