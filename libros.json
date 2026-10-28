@@ -275,6 +275,18 @@
       "nota": "",
       "foto": "fotos/a-la-intemperie-mvrm8tdn.jpg",
       "creado": 1793161812135
+    },
+    {
+      "id": "mvrmeqqp",
+      "titulo": "De las mujeres",
+      "autor": "Susan Sontag",
+      "editorial": "Penguin - Debate",
+      "precio": 200,
+      "genero": "Feminismo y literatura de mujeres",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/de-las-mujeres-mvrmeqrc.jpg",
+      "creado": 1793162088673
     }
   ]
 }
