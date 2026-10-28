@@ -47,6 +47,18 @@
       "nota": "",
       "foto": "fotos/jane-eyre-mvrjbw85.jpg",
       "creado": 1793156916954
+    },
+    {
+      "id": "mvrjgety",
+      "titulo": "Ningún reloj cuenta esto",
+      "autor": "Cristina Rivera Garza",
+      "editorial": "Debolsillo",
+      "precio": 200,
+      "genero": "Cuento",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/ningun-reloj-cuenta-esto-mvrjgeua.jpg",
+      "creado": 1793157127702
     }
   ]
 }
