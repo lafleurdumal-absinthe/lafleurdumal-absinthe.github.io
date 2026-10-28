@@ -59,6 +59,18 @@
       "nota": "",
       "foto": "fotos/ningun-reloj-cuenta-esto-mvrjgeua.jpg",
       "creado": 1793157127702
+    },
+    {
+      "id": "mvrjohf0",
+      "titulo": "El Aleph",
+      "autor": "Jorge Luis Borges",
+      "editorial": "Debolsillo",
+      "precio": 250,
+      "genero": "Cuento",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/el-aleph-mvrjohgc.jpg",
+      "creado": 1793157504300
     }
   ]
 }
