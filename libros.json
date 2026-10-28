@@ -251,6 +251,18 @@
       "nota": "",
       "foto": "fotos/cuentos-escogidos-mvrm2aqq.jpg",
       "creado": 1793161508044
+    },
+    {
+      "id": "mvrm5um0",
+      "titulo": "Chico zigzag",
+      "autor": "David Grossman",
+      "editorial": "Debolsillo",
+      "precio": 350,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/chico-zigzag-mvrm5un1.jpg",
+      "creado": 1793161673784
     }
   ]
 }
