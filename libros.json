@@ -395,6 +395,18 @@
       "nota": "",
       "foto": "fotos/tres-poetas-catolicos-ramon-lopez-velarde-carlos-p-mvsvlehq.jpg",
       "creado": 1793237982061
+    },
+    {
+      "id": "mvsw1wv6",
+      "titulo": "Al faro",
+      "autor": "Virginia Woolf",
+      "editorial": "Debolsillo",
+      "precio": 200,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/al-faro-mvsw1wvl.jpg",
+      "creado": 1793238752418
     }
   ]
 }
