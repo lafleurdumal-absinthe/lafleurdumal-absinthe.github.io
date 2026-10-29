@@ -323,6 +323,18 @@
       "nota": "",
       "foto": "fotos/cotidianas-mvsut0br.jpg",
       "creado": 1793236657360
+    },
+    {
+      "id": "mvsuwusa",
+      "titulo": "La hija del sepulturero",
+      "autor": "Joyce Carol Oates",
+      "editorial": "Debolsillo",
+      "precio": 160,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/la-hija-del-sepulturero-mvsuwust.jpg",
+      "creado": 1793236836826
     }
   ]
 }
