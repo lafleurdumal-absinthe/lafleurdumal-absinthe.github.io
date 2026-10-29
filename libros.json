@@ -383,6 +383,18 @@
       "nota": "",
       "foto": "fotos/veinticuatro-horas-en-la-vida-de-una-mujer-mvsvg4e1.jpg",
       "creado": 1793237735695
+    },
+    {
+      "id": "mvsvlegd",
+      "titulo": "Tres poetas católicos (Ramón López Velarde, Carlos Pellicer y Manuel Ponce)",
+      "autor": "Gabriel Zaid",
+      "editorial": "Debolsillo",
+      "precio": 180,
+      "genero": "Ensayo",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/tres-poetas-catolicos-ramon-lopez-velarde-carlos-p-mvsvlehq.jpg",
+      "creado": 1793237982061
     }
   ]
 }
