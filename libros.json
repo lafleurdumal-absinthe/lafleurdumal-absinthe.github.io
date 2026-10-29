@@ -311,6 +311,18 @@
       "nota": "",
       "foto": "fotos/dulce-enemiga-mia-mvsuq4au.jpg",
       "creado": 1793236522547
+    },
+    {
+      "id": "mvsut0b4",
+      "titulo": "Cotidianas",
+      "autor": "Mario Benedetti",
+      "editorial": "Debolsillo",
+      "precio": 200,
+      "genero": "Poesía",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/cotidianas-mvsut0br.jpg",
+      "creado": 1793236657360
     }
   ]
 }
