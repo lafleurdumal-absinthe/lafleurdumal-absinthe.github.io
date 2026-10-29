@@ -371,6 +371,18 @@
       "nota": "",
       "foto": "fotos/orgullo-y-prejuicio-mvsv6rp8.jpg",
       "creado": 1793237299342
+    },
+    {
+      "id": "mvsvg4cv",
+      "titulo": "Veinticuatro horas en la vida de una mujer",
+      "autor": "Stefan Zweig",
+      "editorial": "Penguin clásicos",
+      "precio": 200,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/veinticuatro-horas-en-la-vida-de-una-mujer-mvsvg4e1.jpg",
+      "creado": 1793237735695
     }
   ]
 }
