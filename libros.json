@@ -347,6 +347,18 @@
       "nota": "",
       "foto": "fotos/dracula-mvsv0s2p.jpg",
       "creado": 1793237019926
+    },
+    {
+      "id": "mvsv37e1",
+      "titulo": "El albergue de las mujeres tristes",
+      "autor": "Marcela Serrano",
+      "editorial": "Debolsillo",
+      "precio": 300,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/el-albergue-de-las-mujeres-tristes-mvsv37el.jpg",
+      "creado": 1793237133097
     }
   ]
 }
