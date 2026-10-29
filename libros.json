@@ -299,6 +299,18 @@
       "nota": "",
       "foto": "fotos/el-amante-del-volcan-mvrms1cq.jpg",
       "creado": 1793162708920
+    },
+    {
+      "id": "mvsuq4ab",
+      "titulo": "Dulce enemiga mía",
+      "autor": "Marcela Serrano",
+      "editorial": "Debolsillo",
+      "precio": 200,
+      "genero": "Cuento",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/dulce-enemiga-mia-mvsuq4au.jpg",
+      "creado": 1793236522547
     }
   ]
 }
