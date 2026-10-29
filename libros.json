@@ -335,6 +335,18 @@
       "nota": "",
       "foto": "fotos/la-hija-del-sepulturero-mvsuwust.jpg",
       "creado": 1793236836826
+    },
+    {
+      "id": "mvsv0s2e",
+      "titulo": "Drácula",
+      "autor": "Bram Stoker",
+      "editorial": "Debolsillo",
+      "precio": 250,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/dracula-mvsv0s2p.jpg",
+      "creado": 1793237019926
     }
   ]
 }
