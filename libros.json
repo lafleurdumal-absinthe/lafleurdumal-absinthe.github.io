@@ -407,6 +407,18 @@
       "nota": "",
       "foto": "fotos/al-faro-mvsw1wvl.jpg",
       "creado": 1793238752418
+    },
+    {
+      "id": "mw04hz6z",
+      "titulo": "Mansfield Park",
+      "autor": "Jane Austen",
+      "editorial": "Debolsillo",
+      "precio": 200,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/mansfield-park-mw04hz7o.jpg",
+      "creado": 1793676202091
     }
   ]
 }
