@@ -503,6 +503,18 @@
       "nota": "",
       "foto": "fotos/la-linea-de-sombra-mw0599i5.jpg",
       "creado": 1793677475127
+    },
+    {
+      "id": "mw05emb7",
+      "titulo": "La ternura caníbal",
+      "autor": "Enrique Serna",
+      "editorial": "Debolsillo",
+      "precio": 200,
+      "genero": "Cuento",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/la-ternura-canibal-mw05embz.jpg",
+      "creado": 1793677725043
     }
   ]
 }
