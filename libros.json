@@ -455,6 +455,18 @@
       "nota": "",
       "foto": "fotos/ultramarina-mw04toq7.jpg",
       "creado": 1793676748387
+    },
+    {
+      "id": "mw04wupk",
+      "titulo": "Verdades virtuales",
+      "autor": "Rosa Beltran",
+      "editorial": "Debolsillo",
+      "precio": 100,
+      "genero": "Ensayo",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/verdades-virtuales-mw04wuqc.jpg",
+      "creado": 1793676896120
     }
   ]
 }
