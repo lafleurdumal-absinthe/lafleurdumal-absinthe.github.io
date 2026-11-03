@@ -479,6 +479,18 @@
       "nota": "",
       "foto": "fotos/la-edad-de-hierro-mw050o0h.jpg",
       "creado": 1793677074039
+    },
+    {
+      "id": "mw054xb1",
+      "titulo": "Pásate de la raya. Artículos (1992-2002)",
+      "autor": "Salman Rushdie",
+      "editorial": "Debolsillo",
+      "precio": 300,
+      "genero": "Ensayo",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/pasate-de-la-raya-articulos-1992-2002-mw054xbq.jpg",
+      "creado": 1793677272733
     }
   ]
 }
