@@ -623,6 +623,18 @@
       "nota": "",
       "foto": "fotos/it-eso-mw06lfnl.jpg",
       "creado": 1793679722611
+    },
+    {
+      "id": "mw06o2uz",
+      "titulo": "La historia de Lisey",
+      "autor": "Stephen King",
+      "editorial": "Debolsillo",
+      "precio": 350,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/la-historia-de-lisey-mw06o2vq.jpg",
+      "creado": 1793679846011
     }
   ]
 }
