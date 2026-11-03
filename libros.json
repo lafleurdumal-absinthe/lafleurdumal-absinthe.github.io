@@ -491,6 +491,18 @@
       "nota": "",
       "foto": "fotos/pasate-de-la-raya-articulos-1992-2002-mw054xbq.jpg",
       "creado": 1793677272733
+    },
+    {
+      "id": "mw0599h3",
+      "titulo": "La línea de sombra",
+      "autor": "Joseph Conrad",
+      "editorial": "Debolsillo",
+      "precio": 200,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/la-linea-de-sombra-mw0599i5.jpg",
+      "creado": 1793677475127
     }
   ]
 }
