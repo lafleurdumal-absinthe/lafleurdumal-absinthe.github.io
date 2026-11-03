@@ -575,6 +575,18 @@
       "nota": "",
       "foto": "fotos/el-periferico-mw069fyq.jpg",
       "creado": 1793679163127
+    },
+    {
+      "id": "mw06dcem",
+      "titulo": "El resplandor",
+      "autor": "Stephen King",
+      "editorial": "Debolsillo",
+      "precio": 350,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/el-resplandor-mw06dcfq.jpg",
+      "creado": 1793679345166
     }
   ]
 }
