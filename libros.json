@@ -419,6 +419,18 @@
       "nota": "",
       "foto": "fotos/mansfield-park-mw04hz7o.jpg",
       "creado": 1793676202091
+    },
+    {
+      "id": "mw04l1j0",
+      "titulo": "Mujercitas",
+      "autor": "Louisa May Alcott",
+      "editorial": "Penguin clásicos",
+      "precio": 350,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/mujercitas-mw04l1mw.jpg",
+      "creado": 1793676345084
     }
   ]
 }
