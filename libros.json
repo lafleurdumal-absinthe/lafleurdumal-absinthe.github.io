@@ -539,6 +539,18 @@
       "nota": "",
       "foto": "fotos/la-naturaleza-del-espacio-y-el-tiempo-mw05mxl9.jpg",
       "creado": 1793678112891
+    },
+    {
+      "id": "mw05qvfp",
+      "titulo": "Desayuno en Tiffany's",
+      "autor": "Truman Capote",
+      "editorial": "Debolsillo",
+      "precio": 250,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/desayuno-en-tiffany-s-mw05qvgj.jpg",
+      "creado": 1793678296741
     }
   ]
 }
