@@ -515,6 +515,18 @@
       "nota": "",
       "foto": "fotos/la-ternura-canibal-mw05embz.jpg",
       "creado": 1793677725043
+    },
+    {
+      "id": "mw05ilvt",
+      "titulo": "La borra del café",
+      "autor": "Mario Benedetti",
+      "editorial": "Debolsillo",
+      "precio": 230,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/la-borra-del-cafe-mw05ilwx.jpg",
+      "creado": 1793677911113
     }
   ]
 }
