@@ -635,6 +635,18 @@
       "nota": "",
       "foto": "fotos/la-historia-de-lisey-mw06o2vq.jpg",
       "creado": 1793679846011
+    },
+    {
+      "id": "mw06qx3e",
+      "titulo": "El dragón rojo",
+      "autor": "Thomas Harris",
+      "editorial": "Debolsillo",
+      "precio": 250,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/el-dragon-rojo-mw06qx3r.jpg",
+      "creado": 1793679978506
     }
   ]
 }
