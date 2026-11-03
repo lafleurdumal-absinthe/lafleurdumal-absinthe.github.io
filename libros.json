@@ -467,6 +467,18 @@
       "nota": "",
       "foto": "fotos/verdades-virtuales-mw04wuqc.jpg",
       "creado": 1793676896120
+    },
+    {
+      "id": "mw050nzr",
+      "titulo": "La edad de hierro",
+      "autor": "J. M. Coetzee",
+      "editorial": "Debolsillo",
+      "precio": 200,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/la-edad-de-hierro-mw050o0h.jpg",
+      "creado": 1793677074039
     }
   ]
 }
