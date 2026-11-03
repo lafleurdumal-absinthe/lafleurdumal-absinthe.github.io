@@ -443,6 +443,18 @@
       "nota": "",
       "foto": "fotos/para-combatir-esta-era-consideraciones-urgentes-so-mw04pjph.jpg",
       "creado": 1793676555256
+    },
+    {
+      "id": "mw04topv",
+      "titulo": "Ultramarina",
+      "autor": "Malcolm Lowry",
+      "editorial": "Debolsillo",
+      "precio": 180,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/ultramarina-mw04toq7.jpg",
+      "creado": 1793676748387
     }
   ]
 }
