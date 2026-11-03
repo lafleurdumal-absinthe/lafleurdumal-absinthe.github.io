@@ -587,6 +587,18 @@
       "nota": "",
       "foto": "fotos/el-resplandor-mw06dcfq.jpg",
       "creado": 1793679345166
+    },
+    {
+      "id": "mw06gf0w",
+      "titulo": "Perdida (Gone girl)",
+      "autor": "Gillian Flynn",
+      "editorial": "Debolsillo",
+      "precio": 350,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/perdida-gone-girl-mw06gf2i.jpg",
+      "creado": 1793679488528
     }
   ]
 }
