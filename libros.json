@@ -551,6 +551,18 @@
       "nota": "",
       "foto": "fotos/desayuno-en-tiffany-s-mw05qvgj.jpg",
       "creado": 1793678296741
+    },
+    {
+      "id": "mw05xqd2",
+      "titulo": "Jardines de Kensington",
+      "autor": "Rodrigo Fresán",
+      "editorial": "Debolsillo",
+      "precio": 300,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/jardines-de-kensington-mw05xqdz.jpg",
+      "creado": 1793678616758
     }
   ]
 }
