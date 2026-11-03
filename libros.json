@@ -599,6 +599,18 @@
       "nota": "",
       "foto": "fotos/perdida-gone-girl-mw06gf2i.jpg",
       "creado": 1793679488528
+    },
+    {
+      "id": "mw06if03",
+      "titulo": "Meridiano de Sangre",
+      "autor": "Comarc McCarthy",
+      "editorial": "Debolsillo",
+      "precio": 350,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/meridiano-de-sangre-mw06if1k.jpg",
+      "creado": 1793679581811
     }
   ]
 }
