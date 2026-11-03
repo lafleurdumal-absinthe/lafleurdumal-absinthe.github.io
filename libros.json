@@ -527,6 +527,18 @@
       "nota": "",
       "foto": "fotos/la-borra-del-cafe-mw05ilwx.jpg",
       "creado": 1793677911113
+    },
+    {
+      "id": "mw05mxkr",
+      "titulo": "La naturaleza del espacio y el tiempo",
+      "autor": "Stephen W. Hawking, Roger Penrose",
+      "editorial": "Debolsillo",
+      "precio": 250,
+      "genero": "Ensayo",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/la-naturaleza-del-espacio-y-el-tiempo-mw05mxl9.jpg",
+      "creado": 1793678112891
     }
   ]
 }
