@@ -563,6 +563,18 @@
       "nota": "",
       "foto": "fotos/jardines-de-kensington-mw05xqdz.jpg",
       "creado": 1793678616758
+    },
+    {
+      "id": "mw069fxz",
+      "titulo": "El periférico",
+      "autor": "William Gibson",
+      "editorial": "Rocabolsillo",
+      "precio": 80,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/el-periferico-mw069fyq.jpg",
+      "creado": 1793679163127
     }
   ]
 }
