@@ -611,6 +611,18 @@
       "nota": "",
       "foto": "fotos/meridiano-de-sangre-mw06if1k.jpg",
       "creado": 1793679581811
+    },
+    {
+      "id": "mw06lfn7",
+      "titulo": "It (Eso)",
+      "autor": "Stephen King",
+      "editorial": "Debolsillo",
+      "precio": 450,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/it-eso-mw06lfnl.jpg",
+      "creado": 1793679722611
     }
   ]
 }
