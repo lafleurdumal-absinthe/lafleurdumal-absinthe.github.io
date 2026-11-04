@@ -885,6 +885,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1793775631766
+    },
+    {
+      "id": "mw1rtiws",
+      "titulo": "Líneas fundamentales de la crítica de la economía política («Grundrisse»)",
+      "autor": "Karl Marx",
+      "editorial": "",
+      "precio": 1000,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/lineas-fundamentales-de-la-critica-de-la-economia--mw1rtiws0.jpg",
+      "thumb": "fotos/m/lineas-fundamentales-de-la-critica-de-la-economia--mw1rtiws0.jpg",
+      "fotos": [
+        "fotos/lineas-fundamentales-de-la-critica-de-la-economia--mw1rtiws0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/lineas-fundamentales-de-la-critica-de-la-economia--mw1rtiws0.jpg"
+      ],
+      "novedad": false,
+      "serie": "",
+      "tomo": "",
+      "creado": 1793775838295
     }
   ]
 }
