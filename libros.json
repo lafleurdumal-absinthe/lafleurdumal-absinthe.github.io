@@ -863,6 +863,28 @@
         "fotos/m/el-dragon-rojo-mw06qx3r.jpg"
       ],
       "thumb": "fotos/m/el-dragon-rojo-mw06qx3r.jpg"
+    },
+    {
+      "id": "mw1rp3lo",
+      "titulo": "Menos que nada Hegel y la sombra del materialismo dialéctico",
+      "autor": "Slavoj Žižek",
+      "editorial": "Akal",
+      "precio": 1400,
+      "genero": "Poesía",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/menos-que-nada-hegel-y-la-sombra-del-materialismo--mw1rp3lo0.jpg",
+      "thumb": "fotos/m/menos-que-nada-hegel-y-la-sombra-del-materialismo--mw1rp3lo0.jpg",
+      "fotos": [
+        "fotos/menos-que-nada-hegel-y-la-sombra-del-materialismo--mw1rp3lo0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/menos-que-nada-hegel-y-la-sombra-del-materialismo--mw1rp3lo0.jpg"
+      ],
+      "novedad": false,
+      "serie": "",
+      "tomo": "",
+      "creado": 1793775631766
     }
   ]
 }
