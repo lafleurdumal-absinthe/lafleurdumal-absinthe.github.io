@@ -977,6 +977,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1793776662471
+    },
+    {
+      "id": "mw1sdb37",
+      "titulo": "Radio Benjamin",
+      "autor": "Walter Benjamin",
+      "editorial": "Akal",
+      "precio": 900,
+      "genero": "Feminismo y literatura de mujeres",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/radio-benjamin-mw1sdb370.jpg",
+      "thumb": "fotos/m/radio-benjamin-mw1sdb370.jpg",
+      "fotos": [
+        "fotos/radio-benjamin-mw1sdb370.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/radio-benjamin-mw1sdb370.jpg"
+      ],
+      "novedad": false,
+      "serie": "",
+      "tomo": "",
+      "creado": 1793776761199
     }
   ]
 }
