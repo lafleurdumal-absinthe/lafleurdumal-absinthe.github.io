@@ -1021,6 +1021,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1793828575412
+    },
+    {
+      "id": "mw2n9h5k",
+      "titulo": "Deseo postcapitalista Las últimas clases",
+      "autor": "Mark Fisher",
+      "editorial": "Caja Negra",
+      "precio": 480,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/deseo-postcapitalista-las-ultimas-clases-mw2n9h5k0.jpg",
+      "thumb": "fotos/m/deseo-postcapitalista-las-ultimas-clases-mw2n9h5k0.jpg",
+      "fotos": [
+        "fotos/deseo-postcapitalista-las-ultimas-clases-mw2n9h5k0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/deseo-postcapitalista-las-ultimas-clases-mw2n9h5k0.jpg"
+      ],
+      "novedad": false,
+      "serie": "",
+      "tomo": "",
+      "creado": 1793828650575
     }
   ]
 }
