@@ -955,6 +955,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1793776518942
+    },
+    {
+      "id": "mw1sb6wr",
+      "titulo": "Dinero, perlas y flores en la reproducción feminista",
+      "autor": "Mariarosa Dalla Costa",
+      "editorial": "Akal",
+      "precio": 1200,
+      "genero": "Feminismo y literatura de mujeres",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/dinero-perlas-y-flores-en-la-reproduccion-feminist-mw1sb6wr0.jpg",
+      "thumb": "fotos/m/dinero-perlas-y-flores-en-la-reproduccion-feminist-mw1sb6wr0.jpg",
+      "fotos": [
+        "fotos/dinero-perlas-y-flores-en-la-reproduccion-feminist-mw1sb6wr0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/dinero-perlas-y-flores-en-la-reproduccion-feminist-mw1sb6wr0.jpg"
+      ],
+      "novedad": false,
+      "serie": "",
+      "tomo": "",
+      "creado": 1793776662471
     }
   ]
 }
