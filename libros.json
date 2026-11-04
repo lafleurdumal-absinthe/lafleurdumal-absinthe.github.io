@@ -933,6 +933,28 @@
       "serie": "Cuadernos de la cárcel",
       "tomo": "3 Tomos",
       "creado": 1793776111065
+    },
+    {
+      "id": "mw1s845n",
+      "titulo": "Mujeres raza y clase",
+      "autor": "Angela Y. Davis",
+      "editorial": "Akal",
+      "precio": 750,
+      "genero": "Feminismo y literatura de mujeres",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/mujeres-raza-y-clase-mw1s845n0.jpg",
+      "thumb": "fotos/m/mujeres-raza-y-clase-mw1s845n0.jpg",
+      "fotos": [
+        "fotos/mujeres-raza-y-clase-mw1s845n0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/mujeres-raza-y-clase-mw1s845n0.jpg"
+      ],
+      "novedad": false,
+      "serie": "",
+      "tomo": "",
+      "creado": 1793776518942
     }
   ]
 }
