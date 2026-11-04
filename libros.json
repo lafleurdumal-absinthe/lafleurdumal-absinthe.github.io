@@ -907,6 +907,32 @@
       "serie": "",
       "tomo": "",
       "creado": 1793775838295
+    },
+    {
+      "id": "mw1rzddy",
+      "titulo": "Cuadernos de la cárcel I, II y III",
+      "autor": "Antonio Gramsci",
+      "editorial": "Akal",
+      "precio": 2400,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/cuadernos-de-la-carcel-i-ii-y-iii-mw1rzddy0.jpg",
+      "thumb": "fotos/m/cuadernos-de-la-carcel-i-ii-y-iii-mw1rzddy0.jpg",
+      "fotos": [
+        "fotos/cuadernos-de-la-carcel-i-ii-y-iii-mw1rzddy0.jpg",
+        "fotos/cuadernos-de-la-carcel-i-ii-y-iii-mw1rzdee1.jpg",
+        "fotos/cuadernos-de-la-carcel-i-ii-y-iii-mw1rzdek2.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/cuadernos-de-la-carcel-i-ii-y-iii-mw1rzddy0.jpg",
+        "fotos/m/cuadernos-de-la-carcel-i-ii-y-iii-mw1rzdee1.jpg",
+        "fotos/m/cuadernos-de-la-carcel-i-ii-y-iii-mw1rzdek2.jpg"
+      ],
+      "novedad": false,
+      "serie": "Cuadernos de la cárcel",
+      "tomo": "3 Tomos",
+      "creado": 1793776111065
     }
   ]
 }
