@@ -49,7 +49,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--vino)}
 .fotos:empty{display:none}
 .ft{position:relative;width:7rem;display:flex;flex-direction:column;gap:.25rem}
 .ft .im{aspect-ratio:3/4;border:1px solid var(--linea);background:#fff;overflow:hidden;position:relative}
-.ft .im img{width:100%;height:100%;object-fit:cover;display:block}
+.ft .im img{width:100%;height:100%;object-fit:contain;display:block;background:var(--papel-2)}
 .ft.portada .im{border:2px solid var(--vino)}
 .ft .tag{position:absolute;top:.3rem;left:.3rem;background:var(--vino);color:#fff;font-family:var(--sc);letter-spacing:.08em;font-size:.75rem;padding:0 .35rem}
 .ft .ctl{display:flex;gap:.25rem;justify-content:space-between}
@@ -102,6 +102,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--vino)}
 code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
 .toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tinta);color:#fff;padding:.55rem 1.1rem;font-size:1rem;z-index:30;max-width:calc(100% - 32px)}
 
+.xls{font-family:var(--sc);letter-spacing:.12em;text-transform:lowercase;font-size:.95rem;background:var(--vino);color:#fff;border:0;padding:.3rem .8rem;cursor:pointer}
+.xls:hover{background:var(--vino-2)}
 .hstat{font-family:var(--sc);letter-spacing:.1em;color:#cfc5c5;font-size:.9rem;margin-left:auto}
 .hstat button{all:unset;cursor:pointer;color:#ff9aa6;margin-left:.5rem;text-decoration:underline}
 .tabs{display:flex;gap:0;border-bottom:2px solid var(--vino);margin-bottom:-.5rem}
@@ -111,7 +113,7 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
 [hidden]{display:none!important}
 /* inventario compacto */
 .row{grid-template-columns:2.2rem minmax(0,1fr) auto;gap:.75rem;padding:.45rem 0}
-.row img,.row .noimg{width:2.2rem}
+.row img,.row .noimg{width:2.2rem;object-fit:contain}
 .row .t{font-size:1rem}
 .row .s{font-size:.9rem}
 .row .ctl{max-width:none;flex-wrap:nowrap;align-items:center}
@@ -122,7 +124,7 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
 </style>
 </head>
 <body>
-<header><div class="wrap"><h1>La bodega</h1><span class="hstat" id="hstat"></span><a href="./" target="_blank" rel="noopener">página pública ↗</a></div></header>
+<header><div class="wrap"><h1>La bodega</h1><span class="hstat" id="hstat"></span><button class="xls" id="xls" type="button">descargar inventario (Excel)</button><a href="./" target="_blank" rel="noopener">página pública ↗</a></div></header>
 <main class="wrap">
   <div class="tabs" role="tablist"><button class="tab" role="tab" id="tab-subir" aria-selected="true" type="button">Subir libro</button><button class="tab" role="tab" id="tab-inv" aria-selected="false" type="button">Inventario <span id="tab-n"></span></button></div>
 
@@ -432,6 +434,32 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
     });
   }
 
+
+  /* Excel del inventario (siempre con lo último que hay en la bodega) */
+  $('xls').onclick=async()=>{
+    const btn=$('xls');btn.disabled=true;btn.textContent='preparando…';
+    try{
+      if(token){try{libros=await leerRemoto();pintar();}catch(e){}}
+      if(!window.XLSX)throw 0;
+      const L=[...libros].filter(b=>b.estado!=='vendido').sort((a,b)=>(a.genero||'').localeCompare(b.genero||'')||(a.autor||'').localeCompare(b.autor||'')||(a.titulo||'').localeCompare(b.titulo||''));
+      const filas=L.map((b,i)=>({'#':i+1,'Título':b.titulo||'','Autor':b.autor||'','Editorial':b.editorial||'','Género':b.genero||'',
+        'Saga / obra':b.serie||'','Tomo':b.tomo||'','Precio (MXN)':(b.precio==null||b.precio==='')?'':Number(b.precio),'Estado':b.estado==='apartado'?'Apartado':'Disponible',
+        'Novedad':b.novedad?'Sí':'','Nota':b.nota||'','Fecha de alta':b.creado?new Date(b.creado).toLocaleDateString('es-MX'):'',
+        'Vendido en feria (✓)':'','Precio cobrado':'','Forma de pago':''}));
+      const ws=XLSX.utils.json_to_sheet(filas);
+      const n=filas.length+1;
+      XLSX.utils.sheet_add_aoa(ws,[[],['','Total de libros',filas.length,'','','','','Valor del inventario',{f:'SUM(H2:H'+n+')'}],['','Vendidos en feria',{f:'COUNTA(M2:M'+n+')'},'','','','','Total cobrado en feria',{f:'SUM(N2:N'+n+')'}]],{origin:-1});
+      ws['!cols']=[4,38,26,20,20,22,8,12,11,9,30,12,16,14,16].map(w=>({wch:w}));
+      ws['!autofilter']={ref:'A1:O'+n};ws['!freeze']={xSplit:0,ySplit:1};
+      const gen={};L.forEach(b=>{const g=b.genero||'Otros';gen[g]=gen[g]||{n:0,v:0};gen[g].n++;gen[g].v+=Number(b.precio)||0;});
+      const ws2=XLSX.utils.aoa_to_sheet([['Género','Libros','Valor (MXN)'],...Object.entries(gen).sort().map(([g,o])=>[g,o.n,o.v]),[],['Total',L.length,L.reduce((a,b)=>a+(Number(b.precio)||0),0)]]);
+      ws2['!cols']=[{wch:32},{wch:10},{wch:14}];
+      const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Inventario');XLSX.utils.book_append_sheet(wb,ws2,'Por género');
+      const d=new Date(),f=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+      XLSX.writeFile(wb,'Inventario Las flores del mal '+f+'.xlsx');toast('Inventario descargado: '+L.length+' libros.');
+    }catch(e){toast('No se pudo generar el Excel. Revise su conexión e intente de nuevo.');}
+    btn.disabled=false;btn.textContent='descargar inventario (Excel)';
+  };
   /* Miniaturas para los libros que ya estaban */
   $('optim-go').onclick=async()=>{
     const btn=$('optim-go');btn.disabled=true;
@@ -458,5 +486,6 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
   cargar().catch(()=>{$('lista').textContent='No se pudo cargar la lista. Recargue la página.';});
 })();
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
 </html>

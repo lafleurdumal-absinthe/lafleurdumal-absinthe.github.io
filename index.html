@@ -332,6 +332,13 @@ footer .sc{display:block;margin-top:.5rem;font-size:.95rem}
   #catalogo .chip{flex:none}
   .book .price{font-size:1rem}
 }
+
+/* Portadas completas, sin recorte */
+.book .cov{padding:0;background:var(--papel-2)}
+.book .cov img{object-fit:contain;padding:6px}
+@media (hover:hover){.book .cov:hover img{transform:scale(1.02)}}
+.ci img{object-fit:contain;background:var(--papel-2)}
+.f-mini img,.f-otro img{object-fit:contain;background:var(--papel-2)}
 </style>
 
 </head>
