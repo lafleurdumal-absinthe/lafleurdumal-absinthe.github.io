@@ -215,7 +215,7 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
   </section>
   <section class="card" id="historias" hidden>
     <h2>Historia para Instagram</h2>
-    <p class="hint">Elija los libros (hasta 6) en el orden en que quiere que salgan. La historia los muestra uno por uno, como si se pasaran las hojas de un libro, y se descarga como video para subirlo a Instagram.</p>
+    <p class="hint">Elija los libros (hasta 15) en el orden en que quiere que salgan. La historia los muestra uno por uno, como si se pasaran las hojas de un libro, y se descarga como video para subirlo a Instagram.</p>
     <div class="h-wrap">
       <div class="h-izq">
         <div class="h-textos">
@@ -544,7 +544,8 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
 
   /* ---------- Historias para Instagram ---------- */
   const HW=1080,HH=1920,VINO='#8b0f1e',TINTA='#141012',GRIS='#5d5458';
-  const T_IN=1.4,T_HOLD=2.4,T_FLIP=1.0,T_OUT=2.6;
+  const T_IN=1.4,T_FLIP=1.2,T_OUT=2.6;
+  const hHold=()=>{const n=(hSel||[]).length;return n>9?1.7:n>6?2.0:2.4;};
   let hSel=null,hImgs={},hAssets=null,hPlay=0,hBusy=false;
   const hc=$('h-canvas'),hx=hc.getContext('2d');
   const hEase=x=>{x=Math.min(Math.max(x,0),1);return x*x*(3-2*x);};
@@ -558,13 +559,13 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
       const tf=thumbsDe(b)[0]||fotosDe(b)[0];if(tf){const i=new Image();i.src=tf;i.alt='';i.loading='lazy';d.appendChild(i);}
       const n=document.createElement('span');n.className='h-n';n.textContent=on?(hSel.indexOf(b.id)+1):'';d.appendChild(n);
       const t=document.createElement('span');t.className='h-t';t.textContent=b.titulo;d.appendChild(t);
-      d.onclick=()=>{if(hBusy)return;if(on)hSel=hSel.filter(x=>x!==b.id);else{if(hSel.length>=6){toast('Máximo 6 libros por historia.');return;}hSel.push(b.id);}hPintarSel();hPortada();};
+      d.onclick=()=>{if(hBusy)return;if(on)hSel=hSel.filter(x=>x!==b.id);else{if(hSel.length>=15){toast('Máximo 15 libros por historia.');return;}hSel.push(b.id);}hPintarSel();hPortada();};
       box.appendChild(d);});
     $('h-cuenta').textContent=hSel.length?hSel.length+(hSel.length===1?' libro':' libros')+' · '+Math.round(hDur())+' segundos':'Elija al menos un libro.';
     $('h-ver').disabled=$('h-bajar').disabled=!hSel.length;
   }
   const hLibros=()=>hSel.map(id=>libros.find(b=>b.id===id)).filter(Boolean);
-  const hDur=()=>{const n=Math.max(1,hSel.length);return T_IN+n*T_HOLD+(n-1)*T_FLIP+T_OUT;};
+  const hDur=()=>{const n=Math.max(1,hSel.length);return T_IN+n*hHold()+(n-1)*T_FLIP+T_OUT;};
   function hCargarImg(src){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=src;});}
   async function hImg(path){
     if(hImgs[path])return hImgs[path];
@@ -574,11 +575,17 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
     }
     hImgs[path]=im;return im;
   }
+  const hEsc={};
+  async function hEscala(p){ // portada ya reducida al tamaño exacto en que se dibuja: el cuadro sale ligero
+    if(p in hEsc)return hEsc[p];const im=await hImg(p);if(!im){hEsc[p]=null;return null;}
+    const k=Math.min(600/im.naturalWidth,820/im.naturalHeight),c=document.createElement('canvas');
+    c.width=Math.round(im.naturalWidth*k);c.height=Math.round(im.naturalHeight*k);const x=c.getContext('2d');x.imageSmoothingQuality='high';x.drawImage(im,0,0,c.width,c.height);
+    c.naturalWidth=c.width;c.naturalHeight=c.height;hEsc[p]=c;return c;}
   async function hPreparar(){
     if(!hAssets){hAssets={};const A={logo:'img/d4a0409401.webp',am1:'img/3b9554681b.webp',am2:'img/cc9daeb380.webp',petalo:'img/7b3e2b1a53.webp'};
       for(const k in A){try{hAssets[k]=await hCargarImg(A[k]);}catch(e){hAssets[k]=null;}}}
     try{await Promise.all(['400 90px "Grenze Gotisch"','italic 400 56px "EB Garamond"','600 52px "EB Garamond"','500 34px "Cormorant SC"'].map(f=>document.fonts.load(f)));}catch(e){}
-    const bs=hLibros();for(const b of bs){const p=fotosDe(b)[0]||thumbsDe(b)[0];b._img=p?await hImg(p):null;}
+    const bs=hLibros();for(const b of bs){const p=fotosDe(b)[0]||thumbsDe(b)[0];b._img=p?await hEscala(p):null;}
     return bs;
   }
   /* pétalos */
@@ -637,11 +644,11 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
     const enc=hT('h-titulo');
     hTexto('— '+enc+' —',540,435,'italic 400 52px "EB Garamond"',TINTA,aH);
     // libros
-    const fin=T_IN+n*T_HOLD+(n-1)*T_FLIP;
+    const fin=T_IN+n*hHold()+(n-1)*T_FLIP;
     if(t<T_IN){const a=hEase((t-.3)/1.1);hLibro(bs[0],a,(1-a)*70);hInfo(bs[0],hEase((t-.8)/.6));}
-    else if(t<fin){const k=t-T_IN,seg=T_HOLD+T_FLIP,i=Math.min(n-1,Math.floor(k/seg)),r=k-i*seg;
-      if(r<T_HOLD||i===n-1){hLibro(bs[i],1);hInfo(bs[i],1);}
-      else{const p=(r-T_HOLD)/T_FLIP;hLibro(bs[i+1],1);
+    else if(t<fin){const k=t-T_IN,seg=hHold()+T_FLIP,i=Math.min(n-1,Math.floor(k/seg)),r=k-i*seg;
+      if(r<hHold()||i===n-1){hLibro(bs[i],1);hInfo(bs[i],1);}
+      else{const p=(r-hHold())/T_FLIP;hLibro(bs[i+1],1);
         const c=hCaja(bs[i+1]);const g=hx.createLinearGradient(c.x,0,c.x+c.w*.6,0);g.addColorStop(0,'rgba(0,0,0,'+(.3*Math.sin(p*Math.PI))+')');g.addColorStop(1,'rgba(0,0,0,0)');hx.fillStyle=g;hx.fillRect(c.x,c.y,c.w*.6,c.h);
         hHoja(bs[i],p);hInfo(bs[i],1-hEase(p*2));hInfo(bs[i+1],hEase(p*2-1));}}
     else{const p=hEase((t-fin)/1.0),b=bs[n-1];
@@ -671,25 +678,53 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
   let hVT;function hVista(id){if(hPlay||hBusy)return;clearTimeout(hVT);hVT=setTimeout(async()=>{const bs=await hPreparar();if(hPlay)return;
     if(id==='h-fin1'||id==='h-fin2')hFrame(hDur()-.3,bs.length?bs:[null]);else hFrame(bs.length?T_IN+.01:1.2,bs.length?bs:[null]);},120);}
   let hArchivo=null;
+  function hFecha(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function hEntregar(blob,ext){
+    const tipo=ext==='mp4'?'video/mp4':'video/webm',nombre='historia las flores del mal '+hFecha()+'.'+ext;
+    hArchivo=new File([blob],nombre,{type:tipo});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=nombre;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},4000);
+    $('h-msg').textContent='Listo: se descargó «'+nombre+'».'+(ext==='webm'?' Este navegador lo guardó como WEBM; si Instagram no lo acepta, hágalo desde Chrome actualizado.':'');
+    $('h-compartir').hidden=!(navigator.canShare&&navigator.canShare({files:[hArchivo]}));}
+  async function hCodec(){
+    if(!window.VideoEncoder||!window.VideoFrame||!window.Mp4Muxer)return null;
+    for(const codec of ['avc1.640028','avc1.4d0028','avc1.42002a','avc1.420034']){
+      for(const hw of ['prefer-hardware','no-preference']){
+        const cfg={codec,width:HW,height:HH,bitrate:9000000,framerate:30,hardwareAcceleration:hw,avc:{format:'avc'}};
+        try{const r=await VideoEncoder.isConfigSupported(cfg);if(r&&r.supported)return cfg;}catch(e){}}}
+    return null;}
+  /* Cuadro por cuadro: el video sale fluido aunque la computadora sea lenta */
+  async function hCodificar(bs,cfg){
+    const FPS=30,dur=hDur(),N=Math.ceil(dur*FPS);
+    const muxer=new Mp4Muxer.Muxer({target:new Mp4Muxer.ArrayBufferTarget(),video:{codec:'avc',width:HW,height:HH,frameRate:FPS},fastStart:'in-memory'});
+    let fallo=null;const enc=new VideoEncoder({output:(ch,meta)=>muxer.addVideoChunk(ch,meta),error:e=>{fallo=e;}});
+    enc.configure(cfg);
+    for(let i=0;i<N;i++){
+      if(fallo)throw fallo;
+      hFrame(i/FPS,bs);
+      const fr=new VideoFrame(hc,{timestamp:Math.round(i*1e6/FPS),duration:Math.round(1e6/FPS)});
+      enc.encode(fr,{keyFrame:i%60===0});fr.close();
+      if(enc.encodeQueueSize>6)await new Promise(r=>{const w=()=>enc.encodeQueueSize>2?setTimeout(w,5):r();w();});
+      if(i%10===0){$('h-msg').textContent='Armando el video… '+Math.round(i/N*100)+' %';await new Promise(r=>setTimeout(r,0));}}
+    await enc.flush();if(fallo)throw fallo;enc.close();muxer.finalize();
+    return new Blob([muxer.target.buffer],{type:'video/mp4'});}
+  function hGrabarVivo(bs){ // respaldo para navegadores sin WebCodecs
+    return new Promise((res,rej)=>{
+      if(!window.MediaRecorder||!hc.captureStream){rej('sin');return;}
+      const tipos=['video/mp4;codecs=avc1.42E01E','video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm'];
+      const mt=tipos.find(x=>MediaRecorder.isTypeSupported(x))||'';
+      const st=hc.captureStream(30);const rec=new MediaRecorder(st,mt?{mimeType:mt,videoBitsPerSecond:8000000}:{videoBitsPerSecond:8000000});
+      const partes=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)partes.push(e.data);};
+      rec.onstop=()=>{st.getTracks().forEach(x=>x.stop());const tipo=(rec.mimeType||mt||'video/webm').split(';')[0];res({blob:new Blob(partes,{type:tipo}),ext:tipo.includes('mp4')?'mp4':'webm'});};
+      hFrame(0,bs);rec.start(250);hReproducir(bs,()=>setTimeout(()=>rec.stop(),150));});}
   $('h-bajar').onclick=async()=>{
-    if(hBusy)return;
-    if(!window.MediaRecorder||!hc.captureStream){$('h-msg').textContent='Este navegador no puede grabar video. Use Chrome en la computadora o en Android, o Safari en iPhone.';return;}
-    hBusy=true;$('h-bajar').disabled=$('h-ver').disabled=true;$('h-compartir').hidden=true;$('h-msg').textContent='Preparando…';
-    const bs=await hPreparar();
-    const tipos=['video/mp4;codecs=avc1.42E01E','video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm'];
-    const mt=tipos.find(x=>MediaRecorder.isTypeSupported(x))||'';
-    const st=hc.captureStream(30);const rec=new MediaRecorder(st,mt?{mimeType:mt,videoBitsPerSecond:8000000}:{videoBitsPerSecond:8000000});
-    const partes=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)partes.push(e.data);};
-    rec.onstop=()=>{st.getTracks().forEach(x=>x.stop());
-      const tipo=(rec.mimeType||mt||'video/webm').split(';')[0],ext=tipo.includes('mp4')?'mp4':'webm';
-      const d=new Date(),f=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-      const nombre='historia las flores del mal '+f+'.'+ext;const blob=new Blob(partes,{type:tipo});
-      hArchivo=new File([blob],nombre,{type:tipo});
-      const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=nombre;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},4000);
-      $('h-msg').textContent='Listo: se descargó «'+nombre+'».'+(ext==='webm'?' Este navegador lo guardó como WEBM; si Instagram no lo acepta, grábelo desde Chrome actualizado o Safari.':'');
-      $('h-compartir').hidden=!(navigator.canShare&&navigator.canShare({files:[hArchivo]}));
-      hBusy=false;$('h-bajar').disabled=$('h-ver').disabled=!hSel.length;};
-    hFrame(0,bs);rec.start(250);hReproducir(bs,()=>setTimeout(()=>rec.stop(),150));
+    if(hBusy||!hSel.length)return;
+    hBusy=true;hPlay=0;$('h-bajar').disabled=$('h-ver').disabled=true;$('h-compartir').hidden=true;$('h-msg').textContent='Preparando…';
+    try{
+      const bs=await hPreparar();const cfg=await hCodec();
+      if(cfg){try{hEntregar(await hCodificar(bs,cfg),'mp4');}catch(e){const r=await hGrabarVivo(bs);hEntregar(r.blob,r.ext);}}
+      else{const r=await hGrabarVivo(bs);hEntregar(r.blob,r.ext);}
+    }catch(e){$('h-msg').textContent='Este navegador no puede armar el video. Use Chrome en la computadora o en Android, o Safari en iPhone.';}
+    hBusy=false;$('h-bajar').disabled=$('h-ver').disabled=!hSel.length;hPortada();
   };
   $('h-compartir').onclick=async()=>{if(!hArchivo)return;try{await navigator.share({files:[hArchivo],title:'Las flores del mal'});}catch(e){}};
   hc.onclick=()=>$('h-ver').click();
@@ -698,5 +733,6 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
 })();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="mp4-muxer.min.js"></script>
 </body>
 </html>
