@@ -20,17 +20,23 @@
       "id": "mvraalzn",
       "titulo": "Fascismo Cosplay",
       "autor": "Luis Ignacio Garcia",
-      "editorial": "Editorial Caja Negra",
+      "editorial": "Caja Negra",
       "precio": 400,
       "genero": "Teoría crítica",
       "estado": "disponible",
       "nota": "",
       "foto": "fotos/fascismo-cosplay-mvraam05.jpg",
-      "creado": 1793141740499,
+      "thumb": "fotos/m/fascismo-cosplay-mvraam05.jpg",
+      "fotos": [
+        "fotos/fascismo-cosplay-mvraam05.jpg"
+      ],
       "thumbs": [
         "fotos/m/fascismo-cosplay-mvraam05.jpg"
       ],
-      "thumb": "fotos/m/fascismo-cosplay-mvraam05.jpg"
+      "novedad": false,
+      "serie": "",
+      "tomo": "",
+      "creado": 1793141740499
     },
     {
       "id": "mvrizcwo",
