@@ -1055,6 +1055,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1793828650575
+    },
+    {
+      "id": "mw416wyo",
+      "titulo": "El capitalismo tardío",
+      "autor": "Ernest Mandel",
+      "editorial": "Verso",
+      "precio": 800,
+      "genero": "Poesía",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/el-capitalismo-tardio-mw416wyo0.jpg",
+      "thumb": "fotos/m/el-capitalismo-tardio-mw416wyo0.jpg",
+      "fotos": [
+        "fotos/el-capitalismo-tardio-mw416wyo0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/el-capitalismo-tardio-mw416wyo0.jpg"
+      ],
+      "novedad": false,
+      "serie": "",
+      "tomo": "",
+      "creado": 1793912511899
     }
   ]
 }
