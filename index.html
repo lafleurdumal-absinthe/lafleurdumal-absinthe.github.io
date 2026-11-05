@@ -413,7 +413,7 @@ footer .sc{display:block;margin-top:.5rem;font-size:.95rem}
     </div>
 
     <div class="nov-wrap" id="nov-wrap" hidden>
-      <div class="shelf-head"><h3>Novedades</h3><span>recién llegados a la bodega</span></div>
+      <div class="shelf-head"><h3>Novedades</h3></div>
       <div class="shelf" id="nov"></div>
     </div>
     <div class="tools">
@@ -590,7 +590,7 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
   const $=id=>document.getElementById(id);
   let books=[],filtro=TODOS,q="",shown=PAGE,orden="rec",drawn=0,lastG=null,subEd="";
   const NUEVO_DIAS=14;
-  const esNuevo=b=>b.novedad||(b.creado&&Date.now()-b.creado<NUEVO_DIAS*864e5);
+  const esNuevo=b=>!!b.novedad;
 
   const norm=s=>(s||'').toString().trim();
   const low=s=>norm(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
@@ -718,7 +718,7 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     const nov=books.filter(esNuevo).sort((a,b)=>(b.novedad-a.novedad)||(b.creado-a.creado)).slice(0,12);
     const showShelf=nov.length&&filtro===TODOS&&!q;$('nov-wrap').hidden=!showShelf;
     if(showShelf&&!keep){const s=$('nov');s.textContent='';nov.forEach(b=>s.appendChild(card(b,true)));}
-    orden=(filtro===NOV||filtro===SAGA)?'rec':'ed';
+    orden=filtro===EDIT?'ed':'rec';
     pintaSub();
     let list=books.filter(b=>filtro===TODOS||(filtro===EDIT&&(!subEd||edKey(b)===subEd))||(filtro===NOV&&esNuevo(b))||(filtro===SAGA&&b.serie)||b.genero===filtro);
     if(q){const k=low(q);list=list.filter(b=>low([b.titulo,b.autor,b.editorial,b.serie].join(' ')).includes(k));}
