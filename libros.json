@@ -1077,6 +1077,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1793912511899
+    },
+    {
+      "id": "mw418r34",
+      "titulo": "Tan poca vida",
+      "autor": "Hanya Yanagihara",
+      "editorial": "Lumen",
+      "precio": 450,
+      "genero": "Novela",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/tan-poca-vida-mw418r340.jpg",
+      "thumb": "fotos/m/tan-poca-vida-mw418r340.jpg",
+      "fotos": [
+        "fotos/tan-poca-vida-mw418r340.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/tan-poca-vida-mw418r340.jpg"
+      ],
+      "novedad": false,
+      "serie": "",
+      "tomo": "",
+      "creado": 1793912597598
     }
   ]
 }
