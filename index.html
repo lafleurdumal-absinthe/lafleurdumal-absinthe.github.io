@@ -146,6 +146,10 @@ section{padding-block:clamp(3rem,7vw,5rem)}
 input,select,textarea{font:inherit;font-size:1rem;color:var(--tinta);background:var(--papel);border:1px solid #cfc5c5;padding:.5rem .7rem;width:100%;box-sizing:border-box}
 input:focus,select:focus,textarea:focus{border-color:var(--lacre);outline:none}
 #q{max-width:16rem;font-style:italic}
+.grupo{scroll-margin-top:5rem;grid-column:1/-1;display:flex;align-items:baseline;gap:.8rem;margin:.6rem 0 -.9rem;border-bottom:1px solid var(--linea);padding-bottom:.35rem}
+.grupo:first-child{margin-top:0}
+.grupo h3{font-family:var(--gotica);font-weight:400;font-size:1.75rem;color:var(--lacre);margin:0;line-height:1.1}
+.grupo span{font-family:var(--sc);letter-spacing:.1em;color:var(--gris);font-size:.95rem}
 
 /* Vitrina */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(12.5rem,1fr));gap:2.25rem 1.75rem}
@@ -409,7 +413,7 @@ footer .sc{display:block;margin-top:.5rem;font-size:.95rem}
     </div>
     <div class="tools">
       <div class="chips" id="chips"></div>
-      <input id="q" type="search" placeholder="Buscar título, autor o saga…" aria-label="Buscar en el catálogo">
+      <input id="q" type="search" placeholder="Buscar título, autor, editorial…" aria-label="Buscar en el catálogo">
     </div>
     <p class="count" id="count" aria-live="polite"></p>
     <div id="grid" class="grid"></div>
@@ -575,10 +579,10 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
 (function(){
   const WA = "https://wa.me/525519484038";
   const GENEROS=["Poesía","Novela","Cuento","Ensayo","Teoría crítica","Feminismo y literatura de mujeres","Historia","Otros"];
-  const NOV="Novedades", SAGA="Sagas y trilogías", TODOS="Todos";
+  const NOV="Novedades", SAGA="Sagas y trilogías", TODOS="Todos", EDIT="Editoriales";
   const PAGE=12;
   const $=id=>document.getElementById(id);
-  let books=[],filtro=TODOS,q="",shown=PAGE;
+  let books=[],filtro=TODOS,q="",shown=PAGE,orden="rec",drawn=0,lastG=null;
 
   const norm=s=>(s||'').toString().trim();
   const low=s=>norm(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
@@ -596,11 +600,26 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     if(books.some(b=>b.novedad))list.push(NOV);
     GENEROS.forEach(g=>{if(books.some(b=>b.genero===g))list.push(g);});
     if(books.some(b=>b.serie))list.push(SAGA);
+    if(books.some(b=>b.editorial))list.push(EDIT);
     if(!list.includes(filtro))filtro=TODOS;
     list.forEach(g=>{const b=el('button','chip'+(g===NOV?' chip-nov':''),g);b.type='button';b.setAttribute('aria-pressed',g===filtro);
       b.onclick=()=>{filtro=g;shown=PAGE;[...box.children].forEach(c=>c.setAttribute('aria-pressed',c.textContent===g));render();};box.appendChild(b);});
   }
   $('q').addEventListener('input',e=>{q=e.target.value.trim();shown=PAGE;render();});
+  const edName=s=>norm(s).replace(/^editorial\s+/i,'');
+  const edKey=b=>low(edName(b.editorial));
+  function apellido(a){const first=low(a).split(/,| y | & /)[0].trim().split(/\s+/);return first.length?first[first.length-1]+' '+first.join(' '):'';}
+  function ordenar(list){
+    const L=list.slice(),cmp=(x,y)=>x.localeCompare(y,'es');
+    const sinE=b=>edKey(b)?0:1,sinA=b=>b.autor?0:1;
+    if(orden==='ed')L.sort((a,b)=>sinE(a)-sinE(b)||cmp(edKey(a),edKey(b))||cmp(apellido(a.autor),apellido(b.autor))||cmp(low(a.serie),low(b.serie))||tomoN(a)-tomoN(b)||cmp(low(a.titulo),low(b.titulo)));
+    else if(orden==='au')L.sort((a,b)=>sinA(a)-sinA(b)||cmp(apellido(a.autor),apellido(b.autor))||cmp(low(a.serie),low(b.serie))||tomoN(a)-tomoN(b)||cmp(low(a.titulo),low(b.titulo)));
+    else if(orden==='ti')L.sort((a,b)=>cmp(low(a.titulo),low(b.titulo)));
+    else if(orden==='p1'||orden==='p2'){const d=orden==='p1'?1:-1;L.sort((a,b)=>(a.precio==null)-(b.precio==null)||d*((a.precio||0)-(b.precio||0)));}
+    return L;
+  }
+  const edLabel={};
+  function grupoDe(b){if(orden!=='ed')return null;const k=edKey(b);return k?(edLabel[k]||edName(b.editorial)):'Sin editorial';}
   $('more').onclick=()=>{shown+=PAGE;render(true);};
 
   /* Canasta */
@@ -680,19 +699,26 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     return card;
   }
   function render(keep){
-    const grid=$('grid');const prevCount=keep?grid.children.length:0;if(!keep)grid.textContent='';
+    const grid=$('grid');if(!keep){grid.textContent='';drawn=0;lastG=null;}
     // Novedades
     const nov=books.filter(b=>b.novedad).slice(0,12);
     const showShelf=nov.length&&filtro===TODOS&&!q;$('nov-wrap').hidden=!showShelf;
     if(showShelf&&!keep){const s=$('nov');s.textContent='';nov.forEach(b=>s.appendChild(card(b,true)));}
-    let list=books.filter(b=>filtro===TODOS||(filtro===NOV&&b.novedad)||(filtro===SAGA&&b.serie)||b.genero===filtro);
+    orden=filtro===EDIT?'ed':'rec';
+    let list=books.filter(b=>filtro===TODOS||filtro===EDIT||(filtro===NOV&&b.novedad)||(filtro===SAGA&&b.serie)||b.genero===filtro);
     if(q){const k=low(q);list=list.filter(b=>low([b.titulo,b.autor,b.editorial,b.serie].join(' ')).includes(k));}
-    if(filtro===SAGA)list=list.slice().sort((a,c)=>low(a.serie).localeCompare(low(c.serie))||tomoN(a)-tomoN(c));
+    if(filtro===SAGA&&orden==='rec')list=list.slice().sort((a,c)=>low(a.serie).localeCompare(low(c.serie))||tomoN(a)-tomoN(c));
+    else list=ordenar(list);
     if(!books.length){$('empty').hidden=false;$('empty').textContent='Pronto subiremos nuestros libros. Mientras tanto, escríbanos por WhatsApp o Instagram.';$('more-wrap').hidden=true;$('count').textContent='';return;}
     if(!list.length){$('empty').hidden=false;$('empty').textContent='Nada coincide con esa búsqueda.';$('more-wrap').hidden=true;$('count').textContent='';return;}
     $('empty').hidden=true;
-    const vis=list.slice(0,shown);
-    vis.slice(prevCount).forEach(b=>grid.appendChild(card(b)));
+    const todo=orden==='ed';const vis=todo?list:list.slice(0,shown);
+    const cuenta={};if(orden==='ed')list.forEach(b=>{const g=grupoDe(b);cuenta[g]=(cuenta[g]||0)+1;});
+    vis.slice(drawn).forEach(b=>{const g=grupoDe(b);
+      if(g!==null&&g!==lastG){const h=el('div','grupo');h.appendChild(el('h3',null,g));h.appendChild(el('span',null,cuenta[g]===1?'1 libro':cuenta[g]+' libros'));grid.appendChild(h);lastG=g;}
+      grid.appendChild(card(b));});
+    drawn=vis.length;
+
     $('count').textContent=list.length===1?'1 libro':(vis.length<list.length?'Mostrando '+vis.length+' de '+list.length+' libros':list.length+' libros');
     $('more-wrap').hidden=vis.length>=list.length;
     $('more').textContent='ver más libros ('+(list.length-vis.length)+')';
@@ -708,6 +734,8 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
       genero:genero(b.genero),estado:estado(b.estado),nota:norm(b.nota),fotos,thumbs,
       novedad:!!b.novedad,serie:norm(b.serie),tomo:norm(b.tomo),creado:b.creado||0};})
       .filter(b=>b.titulo&&b.estado!=='vendido').sort((a,b)=>b.creado-a.creado);
+    const cnt={};books.forEach(b=>{const k=edKey(b);if(!k)return;const n=edName(b.editorial);(cnt[k]=cnt[k]||{})[n]=(cnt[k][n]||0)+1;});
+    Object.keys(cnt).forEach(k=>{edLabel[k]=Object.entries(cnt[k]).sort((a,b)=>b[1]-a[1])[0][0];});
     chips();render();paintCart();if(location.hash==='#canasta')openCart(true);
   }).catch(()=>{books=[];chips();render();});
 })();
