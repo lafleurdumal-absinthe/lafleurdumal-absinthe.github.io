@@ -112,6 +112,8 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
 .tab{font-family:var(--sc);letter-spacing:.14em;text-transform:lowercase;font-size:1.1rem;background:none;border:1px solid transparent;border-bottom:0;padding:.55rem 1.3rem;color:var(--gris);cursor:pointer}
 .tab[aria-selected="true"]{background:var(--vino);color:#fff}
 .tab:hover:not([aria-selected="true"]){color:var(--vino)}
+.h-textos{display:grid;grid-template-columns:1fr 1fr;gap:.6rem .9rem}
+@media (max-width:560px){.h-textos{grid-template-columns:1fr}}
 .h-wrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:1.5rem;align-items:start}
 .h-libros{display:grid;grid-template-columns:repeat(auto-fill,minmax(6.2rem,1fr));gap:.6rem;max-height:34rem;overflow:auto;padding:.2rem}
 .h-lib{position:relative;display:flex;flex-direction:column;gap:.25rem;background:none;border:2px solid transparent;padding:.25rem;cursor:pointer;text-align:left;font:inherit}
@@ -216,7 +218,13 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
     <p class="hint">Elija los libros (hasta 6) en el orden en que quiere que salgan. La historia los muestra uno por uno, como si se pasaran las hojas de un libro, y se descarga como video para subirlo a Instagram.</p>
     <div class="h-wrap">
       <div class="h-izq">
-        <label><span>encabezado</span><input id="h-titulo" maxlength="40" value="Recién llegados" autocomplete="off"></label>
+        <div class="h-textos">
+          <label><span>encabezado (arriba)</span><input id="h-titulo" class="h-txt" maxlength="40" data-def="Recién llegados" autocomplete="off"></label>
+          <label><span>mensaje final</span><input id="h-fin1" class="h-txt" maxlength="40" data-def="y muchos más en la vitrina" autocomplete="off"></label>
+          <label><span>segunda línea final</span><input id="h-fin2" class="h-txt" maxlength="50" data-def="pídalos por whatsapp desde la página" autocomplete="off"></label>
+          <label><span>recuadro de abajo</span><input id="h-pie" class="h-txt" maxlength="40" data-def="lafleurdumal-absinthe.github.io" autocomplete="off"></label>
+        </div>
+        <button class="btn small" id="h-reset" type="button" style="margin-top:.5rem">volver a los textos originales</button>
         <p class="msg" id="h-cuenta" style="margin:.8rem 0 .4rem"></p>
         <div class="h-libros" id="h-libros"></div>
       </div>
@@ -626,7 +634,7 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
       hx.save();hx.globalAlpha=aH;hx.translate(x,y);hx.rotate(base+Math.sin(t*1.1+ph)*.05);hx.drawImage(im,-w/2,-h,w,h);hx.restore();});
     if(A.logo){const s=190*(1+.015*Math.sin(t*2));hx.save();hx.globalAlpha=aH;hx.drawImage(A.logo,540-s/2,170-s/2,s,s);hx.restore();}
     hTexto('Las flores del mal',540,355,'400 88px "Grenze Gotisch"',VINO,aH);
-    const enc=($('h-titulo').value.trim()||'Recién llegados');
+    const enc=hT('h-titulo');
     hTexto('— '+enc+' —',540,435,'italic 400 52px "EB Garamond"',TINTA,aH);
     // libros
     const fin=T_IN+n*T_HOLD+(n-1)*T_FLIP;
@@ -639,12 +647,12 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
     else{const p=hEase((t-fin)/1.0),b=bs[n-1];
       hx.save();hx.translate(540,920);hx.scale(1-.12*p,1-.12*p);hx.translate(-540,-920);hLibro(b,1);hx.restore();
       hInfo(b,1-p);
-      hTexto('y muchos más en la vitrina',540,1480,'italic 400 54px "EB Garamond"',TINTA,hEase((t-fin-.6)/.8));
-      hTexto('pídalos por whatsapp desde la página',540,1550,'500 32px "Cormorant SC"',GRIS,hEase((t-fin-.9)/.8),3);}
+      hTexto(hT('h-fin1'),540,1480,'italic 400 54px "EB Garamond"',TINTA,hEase((t-fin-.6)/.8));
+      hTexto(hT('h-fin2').toLowerCase(),540,1550,'500 32px "Cormorant SC"',GRIS,hEase((t-fin-.9)/.8),3);}
     // pie
     const pul=t>fin?1+.025*Math.sin((t-fin)*5):1;
-    hx.save();hx.globalAlpha=aH;hx.translate(540,1772);hx.scale(pul,pul);hx.fillStyle=VINO;hx.fillRect(-370,-46,740,92);hx.restore();
-    hx.save();hx.globalAlpha=aH;hx.translate(540,1772);hx.scale(pul,pul);hx.font='400 42px "EB Garamond"';hx.fillStyle='#fff';hx.textAlign='center';hx.textBaseline='middle';hx.fillText('lafleurdumal-absinthe.github.io',0,2);hx.restore();
+    hx.save();hx.globalAlpha=aH;hx.translate(540,1772);hx.scale(pul,pul);hx.font='400 42px "EB Garamond"';const pw=Math.min(960,Math.max(740,hx.measureText(hT('h-pie')).width+100));hx.fillStyle=VINO;hx.fillRect(-pw/2,-46,pw,92);hx.restore();
+    hx.save();hx.globalAlpha=aH;hx.translate(540,1772);hx.scale(pul,pul);hx.font='400 42px "EB Garamond"';hx.fillStyle='#fff';hx.textAlign='center';hx.textBaseline='middle';hx.fillText(hT('h-pie'),0,2);hx.restore();
     if(t<.5){hx.fillStyle='rgba(255,255,255,'+(1-t/.5)+')';hx.fillRect(0,0,HW,HH);}
     if(t>dur-.4){hx.fillStyle='rgba(255,255,255,'+Math.min(1,(t-(dur-.4))/.4)*.0+')';}
   }
@@ -656,7 +664,12 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
       if(t<dur)requestAnimationFrame(paso);else{hPlay=0;if(alTerminar)alTerminar();}};
     requestAnimationFrame(paso);}
   $('h-ver').onclick=async()=>{if(hBusy)return;$('h-msg').textContent='Preparando…';const bs=await hPreparar();$('h-msg').textContent='';hReproducir(bs);};
-  $('h-titulo').oninput=()=>{if(!hPlay)hPortada();};
+  function hT(id){const e=$(id);return e.value.trim()||(e.dataset.def||'');}
+  document.querySelectorAll('.h-txt').forEach(e=>{let v=null;try{v=localStorage.getItem('fdm_'+e.id);}catch(_){}e.value=v!=null?v:e.dataset.def;
+    e.oninput=()=>{try{localStorage.setItem('fdm_'+e.id,e.value);}catch(_){}hVista(e.id);};});
+  $('h-reset').onclick=()=>{document.querySelectorAll('.h-txt').forEach(e=>{e.value=e.dataset.def;try{localStorage.removeItem('fdm_'+e.id);}catch(_){}});hVista('h-titulo');};
+  let hVT;function hVista(id){if(hPlay||hBusy)return;clearTimeout(hVT);hVT=setTimeout(async()=>{const bs=await hPreparar();if(hPlay)return;
+    if(id==='h-fin1'||id==='h-fin2')hFrame(hDur()-.3,bs.length?bs:[null]);else hFrame(bs.length?T_IN+.01:1.2,bs.length?bs:[null]);},120);}
   let hArchivo=null;
   $('h-bajar').onclick=async()=>{
     if(hBusy)return;
