@@ -146,6 +146,11 @@ section{padding-block:clamp(3rem,7vw,5rem)}
 input,select,textarea{font:inherit;font-size:1rem;color:var(--tinta);background:var(--papel);border:1px solid #cfc5c5;padding:.5rem .7rem;width:100%;box-sizing:border-box}
 input:focus,select:focus,textarea:focus{border-color:var(--lacre);outline:none}
 #q{max-width:16rem;font-style:italic}
+.subed{display:flex;flex-wrap:wrap;gap:.3rem;margin:-1.2rem 0 1.6rem}
+.subed button{font-family:var(--body);font-size:1rem;background:none;border:1px solid var(--linea);color:var(--gris);padding:.15rem .7rem;cursor:pointer}
+.subed button:hover{color:var(--tinta);border-color:var(--tinta)}
+.subed button[aria-pressed="true"]{border-color:var(--lacre);color:var(--lacre)}
+.subed small{opacity:.7}
 .grupo{scroll-margin-top:5rem;grid-column:1/-1;display:flex;align-items:baseline;gap:.8rem;margin:.6rem 0 -.9rem;border-bottom:1px solid var(--linea);padding-bottom:.35rem}
 .grupo:first-child{margin-top:0}
 .grupo h3{font-family:var(--gotica);font-weight:400;font-size:1.75rem;color:var(--lacre);margin:0;line-height:1.1}
@@ -415,6 +420,7 @@ footer .sc{display:block;margin-top:.5rem;font-size:.95rem}
       <div class="chips" id="chips"></div>
       <input id="q" type="search" placeholder="Buscar título, autor, editorial…" aria-label="Buscar en el catálogo">
     </div>
+    <div class="subed" id="subed" hidden></div>
     <p class="count" id="count" aria-live="polite"></p>
     <div id="grid" class="grid"></div>
     <div class="more-wrap" id="more-wrap" hidden><button id="more" type="button">ver más libros</button></div>
@@ -582,7 +588,9 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
   const NOV="Novedades", SAGA="Sagas y trilogías", TODOS="Todos", EDIT="Editoriales";
   const PAGE=12;
   const $=id=>document.getElementById(id);
-  let books=[],filtro=TODOS,q="",shown=PAGE,orden="rec",drawn=0,lastG=null;
+  let books=[],filtro=TODOS,q="",shown=PAGE,orden="rec",drawn=0,lastG=null,subEd="";
+  const NUEVO_DIAS=14;
+  const esNuevo=b=>b.novedad||(b.creado&&Date.now()-b.creado<NUEVO_DIAS*864e5);
 
   const norm=s=>(s||'').toString().trim();
   const low=s=>norm(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
@@ -597,12 +605,13 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
   function chips(){
     const box=$('chips');box.textContent='';
     const list=[TODOS];
-    if(books.some(b=>b.novedad))list.push(NOV);
+    if(books.some(esNuevo))list.push(NOV);
     GENEROS.forEach(g=>{if(books.some(b=>b.genero===g))list.push(g);});
     if(books.some(b=>b.serie))list.push(SAGA);
+    if(books.some(b=>b.editorial))list.push(EDIT);
     if(!list.includes(filtro))filtro=TODOS;
     list.forEach(g=>{const b=el('button','chip'+(g===NOV?' chip-nov':''),g);b.type='button';b.setAttribute('aria-pressed',g===filtro);
-      b.onclick=()=>{filtro=g;shown=PAGE;[...box.children].forEach(c=>c.setAttribute('aria-pressed',c.textContent===g));render();};box.appendChild(b);});
+      b.onclick=()=>{filtro=g;shown=PAGE;subEd='';[...box.children].forEach(c=>c.setAttribute('aria-pressed',c.textContent===g));render();};box.appendChild(b);});
   }
   $('q').addEventListener('input',e=>{q=e.target.value.trim();shown=PAGE;render();});
   const edName=s=>norm(s).replace(/^editorial\s+/i,'');
@@ -618,6 +627,12 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     return L;
   }
   const edLabel={};
+  function pintaSub(){
+    const box=$('subed');box.hidden=filtro!==EDIT;if(box.hidden)return;box.textContent='';
+    const c={};books.forEach(b=>{const k=edKey(b);if(k)c[k]=(c[k]||0)+1;});
+    const add=(k,txt,n)=>{const b=el('button');b.type='button';b.textContent=txt+' ';if(n)b.appendChild(el('small',null,'('+n+')'));b.setAttribute('aria-pressed',subEd===k);b.onclick=()=>{subEd=k;shown=PAGE;render();};box.appendChild(b);};
+    add('','todas');Object.keys(c).sort((a,b)=>a.localeCompare(b,'es')).forEach(k=>add(k,edLabel[k]||k,c[k]));
+  }
   function grupoDe(b){if(orden!=='ed')return null;const k=edKey(b);return k?(edLabel[k]||edName(b.editorial)):'Sin editorial';}
   $('more').onclick=()=>{shown+=PAGE;render(true);};
 
@@ -683,7 +698,7 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     const card=el('article','book '+b.estado+(small?' mini':''));
     const cov=el('button','cov');cov.type='button';cov.setAttribute('aria-label','Ver ficha de '+b.titulo);
     if(b.estado==='apartado')cov.appendChild(el('span','badge apartado','apartado'));
-    else if(b.novedad&&!small)cov.appendChild(el('span','badge nov','novedad'));
+    else if(esNuevo(b)&&!small)cov.appendChild(el('span','badge nov','novedad'));
     const t0=thumbOf(b);
     if(t0){const img=new Image();img.alt='';img.loading='lazy';img.decoding='async';img.width=300;img.height=400;img.src=t0;
       img.onerror=()=>{img.remove();const ph=el('span','ph',b.titulo);cov.appendChild(ph);};cov.appendChild(img);}
@@ -700,11 +715,12 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
   function render(keep){
     const grid=$('grid');if(!keep){grid.textContent='';drawn=0;lastG=null;}
     // Novedades
-    const nov=books.filter(b=>b.novedad).slice(0,12);
+    const nov=books.filter(esNuevo).sort((a,b)=>(b.novedad-a.novedad)||(b.creado-a.creado)).slice(0,12);
     const showShelf=nov.length&&filtro===TODOS&&!q;$('nov-wrap').hidden=!showShelf;
     if(showShelf&&!keep){const s=$('nov');s.textContent='';nov.forEach(b=>s.appendChild(card(b,true)));}
     orden=(filtro===NOV||filtro===SAGA)?'rec':'ed';
-    let list=books.filter(b=>filtro===TODOS||filtro===EDIT||(filtro===NOV&&b.novedad)||(filtro===SAGA&&b.serie)||b.genero===filtro);
+    pintaSub();
+    let list=books.filter(b=>filtro===TODOS||(filtro===EDIT&&(!subEd||edKey(b)===subEd))||(filtro===NOV&&esNuevo(b))||(filtro===SAGA&&b.serie)||b.genero===filtro);
     if(q){const k=low(q);list=list.filter(b=>low([b.titulo,b.autor,b.editorial,b.serie].join(' ')).includes(k));}
     if(filtro===SAGA&&orden==='rec')list=list.slice().sort((a,c)=>low(a.serie).localeCompare(low(c.serie))||tomoN(a)-tomoN(c));
     else list=ordenar(list);
