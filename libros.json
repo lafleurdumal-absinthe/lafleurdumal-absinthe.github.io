@@ -810,11 +810,17 @@
       "estado": "disponible",
       "nota": "",
       "foto": "fotos/meridiano-de-sangre-mw06if1k.jpg",
-      "creado": 1793679581811,
+      "thumb": "fotos/m/meridiano-de-sangre-mw06if1k.jpg",
+      "fotos": [
+        "fotos/meridiano-de-sangre-mw06if1k.jpg"
+      ],
       "thumbs": [
         "fotos/m/meridiano-de-sangre-mw06if1k.jpg"
       ],
-      "thumb": "fotos/m/meridiano-de-sangre-mw06if1k.jpg"
+      "novedad": false,
+      "serie": "",
+      "tomo": "",
+      "creado": 1793679581811
     },
     {
       "id": "mw06lfn7",
