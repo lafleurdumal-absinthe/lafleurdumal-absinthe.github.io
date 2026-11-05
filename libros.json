@@ -1099,6 +1099,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1793912597598
+    },
+    {
+      "id": "mw41bs94",
+      "titulo": "Utopías digitales Imaginar el fin del capitalismo",
+      "autor": "Ekaitz Cancela",
+      "editorial": "Verso",
+      "precio": 350,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/utopias-digitales-imaginar-el-fin-del-capitalismo-mw41bs940.jpg",
+      "thumb": "fotos/m/utopias-digitales-imaginar-el-fin-del-capitalismo-mw41bs940.jpg",
+      "fotos": [
+        "fotos/utopias-digitales-imaginar-el-fin-del-capitalismo-mw41bs940.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/utopias-digitales-imaginar-el-fin-del-capitalismo-mw41bs940.jpg"
+      ],
+      "novedad": false,
+      "serie": "",
+      "tomo": "",
+      "creado": 1793912739031
     }
   ]
 }
