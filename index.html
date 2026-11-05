@@ -600,7 +600,6 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     if(books.some(b=>b.novedad))list.push(NOV);
     GENEROS.forEach(g=>{if(books.some(b=>b.genero===g))list.push(g);});
     if(books.some(b=>b.serie))list.push(SAGA);
-    if(books.some(b=>b.editorial))list.push(EDIT);
     if(!list.includes(filtro))filtro=TODOS;
     list.forEach(g=>{const b=el('button','chip'+(g===NOV?' chip-nov':''),g);b.type='button';b.setAttribute('aria-pressed',g===filtro);
       b.onclick=()=>{filtro=g;shown=PAGE;[...box.children].forEach(c=>c.setAttribute('aria-pressed',c.textContent===g));render();};box.appendChild(b);});
@@ -704,7 +703,7 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     const nov=books.filter(b=>b.novedad).slice(0,12);
     const showShelf=nov.length&&filtro===TODOS&&!q;$('nov-wrap').hidden=!showShelf;
     if(showShelf&&!keep){const s=$('nov');s.textContent='';nov.forEach(b=>s.appendChild(card(b,true)));}
-    orden=filtro===EDIT?'ed':'rec';
+    orden=(filtro===NOV||filtro===SAGA)?'rec':'ed';
     let list=books.filter(b=>filtro===TODOS||filtro===EDIT||(filtro===NOV&&b.novedad)||(filtro===SAGA&&b.serie)||b.genero===filtro);
     if(q){const k=low(q);list=list.filter(b=>low([b.titulo,b.autor,b.editorial,b.serie].join(' ')).includes(k));}
     if(filtro===SAGA&&orden==='rec')list=list.slice().sort((a,c)=>low(a.serie).localeCompare(low(c.serie))||tomoN(a)-tomoN(c));
@@ -712,7 +711,7 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     if(!books.length){$('empty').hidden=false;$('empty').textContent='Pronto subiremos nuestros libros. Mientras tanto, escríbanos por WhatsApp o Instagram.';$('more-wrap').hidden=true;$('count').textContent='';return;}
     if(!list.length){$('empty').hidden=false;$('empty').textContent='Nada coincide con esa búsqueda.';$('more-wrap').hidden=true;$('count').textContent='';return;}
     $('empty').hidden=true;
-    const todo=orden==='ed';const vis=todo?list:list.slice(0,shown);
+    const vis=list.slice(0,shown);
     const cuenta={};if(orden==='ed')list.forEach(b=>{const g=grupoDe(b);cuenta[g]=(cuenta[g]||0)+1;});
     vis.slice(drawn).forEach(b=>{const g=grupoDe(b);
       if(g!==null&&g!==lastG){const h=el('div','grupo');h.appendChild(el('h3',null,g));h.appendChild(el('span',null,cuenta[g]===1?'1 libro':cuenta[g]+' libros'));grid.appendChild(h);lastG=g;}
