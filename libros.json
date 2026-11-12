@@ -1143,6 +1143,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1794450291769
+    },
+    {
+      "id": "mwcxiwvz",
+      "titulo": "Arte y cosmotécnica",
+      "autor": "Yuk Hui",
+      "editorial": "Caja Negra",
+      "precio": 600,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/arte-y-cosmotecnica-mwcxiwvz0.jpg",
+      "thumb": "fotos/m/arte-y-cosmotecnica-mwcxiwvz0.jpg",
+      "fotos": [
+        "fotos/arte-y-cosmotecnica-mwcxiwvz0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/arte-y-cosmotecnica-mwcxiwvz0.jpg"
+      ],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794450548756
     }
   ]
 }
