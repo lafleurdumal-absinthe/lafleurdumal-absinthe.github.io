@@ -1363,6 +1363,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1794454201011
+    },
+    {
+      "id": "mwczwfz7",
+      "titulo": "Recursividad y contingencia",
+      "autor": "Yuk Hui",
+      "editorial": "Caja Negra",
+      "precio": 620,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/recursividad-y-contingencia-mwczwfz70.jpg",
+      "thumb": "fotos/m/recursividad-y-contingencia-mwczwfz70.jpg",
+      "fotos": [
+        "fotos/recursividad-y-contingencia-mwczwfz70.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/recursividad-y-contingencia-mwczwfz70.jpg"
+      ],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794454539260
     }
   ]
 }
