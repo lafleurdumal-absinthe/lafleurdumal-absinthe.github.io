@@ -1483,11 +1483,15 @@
       "genero": "Ensayo",
       "estado": "disponible",
       "nota": "",
-      "foto": "",
-      "thumb": "",
-      "fotos": [],
-      "thumbs": [],
-      "novedad": false,
+      "foto": "fotos/sintesis-reflexiones-sobre-la-creatividad-mwd0j0640.jpg",
+      "thumb": "fotos/m/sintesis-reflexiones-sobre-la-creatividad-mwd0j0640.jpg",
+      "fotos": [
+        "fotos/sintesis-reflexiones-sobre-la-creatividad-mwd0j0640.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/sintesis-reflexiones-sobre-la-creatividad-mwd0j0640.jpg"
+      ],
+      "novedad": true,
       "serie": "",
       "tomo": "",
       "creado": 1794455490756
