@@ -1197,10 +1197,14 @@
       "genero": "Teoría crítica",
       "estado": "disponible",
       "nota": "",
-      "foto": "",
-      "thumb": "",
-      "fotos": [],
-      "thumbs": [],
+      "foto": "fotos/el-imperio-de-la-normalidad-mwcxohsf0.jpg",
+      "thumb": "fotos/m/el-imperio-de-la-normalidad-mwcxohsf0.jpg",
+      "fotos": [
+        "fotos/el-imperio-de-la-normalidad-mwcxohsf0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/el-imperio-de-la-normalidad-mwcxohsf0.jpg"
+      ],
       "novedad": true,
       "serie": "",
       "tomo": "",
