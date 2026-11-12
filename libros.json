@@ -1407,6 +1407,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1794454732629
+    },
+    {
+      "id": "mwd036o3",
+      "titulo": "La era del individuo tirano. El fin de un mundo común",
+      "autor": "Eric Sadin",
+      "editorial": "Caja Negra",
+      "precio": 480,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/la-era-del-individuo-tirano-el-fin-de-un-mundo-com-mwd036o30.jpg",
+      "thumb": "fotos/m/la-era-del-individuo-tirano-el-fin-de-un-mundo-com-mwd036o30.jpg",
+      "fotos": [
+        "fotos/la-era-del-individuo-tirano-el-fin-de-un-mundo-com-mwd036o30.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/la-era-del-individuo-tirano-el-fin-de-un-mundo-com-mwd036o30.jpg"
+      ],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794454853826
     }
   ]
 }
