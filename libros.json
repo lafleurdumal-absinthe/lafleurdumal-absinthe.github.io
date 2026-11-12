@@ -1231,6 +1231,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1794450938202
+    },
+    {
+      "id": "mwcxv348",
+      "titulo": "La pregunta por la técnica en China",
+      "autor": "Yuk Hui",
+      "editorial": "Caja Negra",
+      "precio": 570,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/la-pregunta-por-la-tecnica-en-china-mwcxv3480.jpg",
+      "thumb": "fotos/m/la-pregunta-por-la-tecnica-en-china-mwcxv3480.jpg",
+      "fotos": [
+        "fotos/la-pregunta-por-la-tecnica-en-china-mwcxv3480.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/la-pregunta-por-la-tecnica-en-china-mwcxv3480.jpg"
+      ],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794451116704
     }
   ]
 }
