@@ -1385,6 +1385,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1794454539260
+    },
+    {
+      "id": "mwd00l6r",
+      "titulo": "Tímidos radicales",
+      "autor": "Ahsan Hamja",
+      "editorial": "Caja Negra",
+      "precio": 480,
+      "genero": "Ensayo",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/timidos-radicales-mwd00l6r0.jpg",
+      "thumb": "fotos/m/timidos-radicales-mwd00l6r0.jpg",
+      "fotos": [
+        "fotos/timidos-radicales-mwd00l6r0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/timidos-radicales-mwd00l6r0.jpg"
+      ],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794454732629
     }
   ]
 }
