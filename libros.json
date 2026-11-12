@@ -1165,6 +1165,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1794450548756
+    },
+    {
+      "id": "mwcxljjb",
+      "titulo": "Capitalismo de plataformas",
+      "autor": "Nick  Srnicek",
+      "editorial": "Caja Negra",
+      "precio": 400,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/capitalismo-de-plataformas-mwcxljjb0.jpg",
+      "thumb": "fotos/m/capitalismo-de-plataformas-mwcxljjb0.jpg",
+      "fotos": [
+        "fotos/capitalismo-de-plataformas-mwcxljjb0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/capitalismo-de-plataformas-mwcxljjb0.jpg"
+      ],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794450671417
     }
   ]
 }
