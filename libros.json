@@ -1351,10 +1351,14 @@
       "genero": "Ensayo",
       "estado": "disponible",
       "nota": "",
-      "foto": "",
-      "thumb": "",
-      "fotos": [],
-      "thumbs": [],
+      "foto": "fotos/retromania-la-adiccion-del-pop-a-su-propio-pasado-mwczqvab0.jpg",
+      "thumb": "fotos/m/retromania-la-adiccion-del-pop-a-su-propio-pasado-mwczqvab0.jpg",
+      "fotos": [
+        "fotos/retromania-la-adiccion-del-pop-a-su-propio-pasado-mwczqvab0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/retromania-la-adiccion-del-pop-a-su-propio-pasado-mwczqvab0.jpg"
+      ],
       "novedad": true,
       "serie": "",
       "tomo": "",
