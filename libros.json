@@ -1451,6 +1451,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1794455109895
+    },
+    {
+      "id": "mwd0aqfo",
+      "titulo": "RE-SISTERS",
+      "autor": "Cosey Fanni Tutti",
+      "editorial": "",
+      "precio": 550,
+      "genero": "Ensayo",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/re-sisters-mwd0aqfo0.jpg",
+      "thumb": "fotos/m/re-sisters-mwd0aqfo0.jpg",
+      "fotos": [
+        "fotos/re-sisters-mwd0aqfo0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/re-sisters-mwd0aqfo0.jpg"
+      ],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794455206018
     }
   ]
 }
