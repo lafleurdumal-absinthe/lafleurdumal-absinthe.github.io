@@ -1429,6 +1429,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1794454853826
+    },
+    {
+      "id": "mwd08o9n",
+      "titulo": "Hyperpop",
+      "autor": "Julie Ackermann",
+      "editorial": "",
+      "precio": 550,
+      "genero": "Ensayo",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/hyperpop-mwd08o9o0.jpg",
+      "thumb": "fotos/m/hyperpop-mwd08o9o0.jpg",
+      "fotos": [
+        "fotos/hyperpop-mwd08o9o0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/hyperpop-mwd08o9o0.jpg"
+      ],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794455109895
     }
   ]
 }
