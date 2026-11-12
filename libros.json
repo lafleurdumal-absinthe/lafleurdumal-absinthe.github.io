@@ -1209,6 +1209,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1794450753352
+    },
+    {
+      "id": "mwcxr9dc",
+      "titulo": "¿Hay mundo por venir? Ensayo sobre los miedos y los fines",
+      "autor": "Déborah Danowski/Eduardo Viveiros de Castro",
+      "editorial": "Caja Negra",
+      "precio": 500,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/hay-mundo-por-venir-ensayo-sobre-los-miedos-y-los--mwcxr9dc0.jpg",
+      "thumb": "fotos/m/hay-mundo-por-venir-ensayo-sobre-los-miedos-y-los--mwcxr9dc0.jpg",
+      "fotos": [
+        "fotos/hay-mundo-por-venir-ensayo-sobre-los-miedos-y-los--mwcxr9dc0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/hay-mundo-por-venir-ensayo-sobre-los-miedos-y-los--mwcxr9dc0.jpg"
+      ],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794450938202
     }
   ]
 }
