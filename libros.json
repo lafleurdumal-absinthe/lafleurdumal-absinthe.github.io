@@ -1121,6 +1121,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1793912739031
+    },
+    {
+      "id": "mwcxdekv",
+      "titulo": "Desentendimiento. Una forma perversa de la razón en la crisis permanente",
+      "autor": "Alenka Zupančič",
+      "editorial": "Caja Negra",
+      "precio": 420,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/desentendimiento-una-forma-perversa-de-la-razon-en-mwcxdekv0.jpg",
+      "thumb": "fotos/m/desentendimiento-una-forma-perversa-de-la-razon-en-mwcxdekv0.jpg",
+      "fotos": [
+        "fotos/desentendimiento-una-forma-perversa-de-la-razon-en-mwcxdekv0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/desentendimiento-una-forma-perversa-de-la-razon-en-mwcxdekv0.jpg"
+      ],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794450291769
     }
   ]
 }
