@@ -1297,6 +1297,28 @@
       "serie": "",
       "tomo": "",
       "creado": 1794453223474
+    },
+    {
+      "id": "mwcz5ryy",
+      "titulo": "Neo-operaísmo",
+      "autor": "Mauro Reis (Comp.)",
+      "editorial": "Caja Negra",
+      "precio": 570,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "fotos/neo-operaismo-mwcz5ryy0.jpg",
+      "thumb": "fotos/m/neo-operaismo-mwcz5ryy0.jpg",
+      "fotos": [
+        "fotos/neo-operaismo-mwcz5ryy0.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/neo-operaismo-mwcz5ryy0.jpg"
+      ],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794453295084
     }
   ]
 }
