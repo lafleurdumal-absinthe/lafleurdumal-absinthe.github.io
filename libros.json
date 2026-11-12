@@ -1319,6 +1319,24 @@
       "serie": "",
       "tomo": "",
       "creado": 1794453295084
+    },
+    {
+      "id": "mwcznae2",
+      "titulo": "No binarix",
+      "autor": "Genesis P-Orridge",
+      "editorial": "Caja Negra",
+      "precio": 620,
+      "genero": "Otros",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "",
+      "thumb": "",
+      "fotos": [],
+      "thumbs": [],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794454112091
     }
   ]
 }
