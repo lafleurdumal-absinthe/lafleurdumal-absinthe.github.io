@@ -1187,6 +1187,24 @@
       "serie": "",
       "tomo": "",
       "creado": 1794450671417
+    },
+    {
+      "id": "mwcxnars",
+      "titulo": "El Imperio de la normalidad",
+      "autor": "Robert Chapman",
+      "editorial": "Caja Negra",
+      "precio": 500,
+      "genero": "Teoría crítica",
+      "estado": "disponible",
+      "nota": "",
+      "foto": "",
+      "thumb": "",
+      "fotos": [],
+      "thumbs": [],
+      "novedad": true,
+      "serie": "",
+      "tomo": "",
+      "creado": 1794450753352
     }
   ]
 }
