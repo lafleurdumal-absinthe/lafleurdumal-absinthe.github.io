@@ -1329,10 +1329,14 @@
       "genero": "Otros",
       "estado": "disponible",
       "nota": "",
-      "foto": "",
-      "thumb": "",
-      "fotos": [],
-      "thumbs": [],
+      "foto": "fotos/no-binarix-mwczqbx00.jpg",
+      "thumb": "fotos/m/no-binarix-mwczqbx00.jpg",
+      "fotos": [
+        "fotos/no-binarix-mwczqbx00.jpg"
+      ],
+      "thumbs": [
+        "fotos/m/no-binarix-mwczqbx00.jpg"
+      ],
       "novedad": true,
       "serie": "",
       "tomo": "",
