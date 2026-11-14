@@ -293,6 +293,9 @@ footer .sc{display:block;margin-top:.5rem;font-size:.95rem}
 .book .cov .ph{font-family:var(--gotica);font-size:1.25rem;line-height:1.1;color:var(--lacre)}
 .badge{top:.45rem;left:.45rem;font-size:.78rem;padding:0 .45rem}
 .badge.nov{background:var(--lacre);color:var(--papel);border-color:var(--lacre)}
+.badge.of{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.book .price s,.f-price s{font-weight:400;color:var(--gris);font-size:.8em;margin-right:.35em;text-decoration-thickness:1px}
+.f-price .pct{font-family:var(--sc);letter-spacing:.1em;font-size:.7em;font-weight:400;border:1px solid var(--lacre);padding:0 .4em;margin-left:.5em;vertical-align:.15em}
 .book h3{font-size:1.02rem;line-height:1.2;margin-top:.35rem}
 .book .tlink{all:unset;cursor:pointer;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-family:var(--body);font-weight:600}
 .book .tlink:hover{color:var(--lacre)}
@@ -412,6 +415,10 @@ footer .sc{display:block;margin-top:.5rem;font-size:.95rem}
       <p>Nuestro acervo, ejemplar por ejemplar. Cada libro es una pieza única: cuando se va, se va.</p>
     </div>
 
+    <div class="nov-wrap of-wrap" id="of-wrap" hidden>
+      <div class="shelf-head"><h3 id="of-h"></h3><span id="of-fechas"></span></div>
+      <div class="shelf" id="of"></div>
+    </div>
     <div class="nov-wrap" id="nov-wrap" hidden>
       <div class="shelf-head"><h3>Novedades</h3></div>
       <div class="shelf" id="nov"></div>
@@ -591,6 +598,13 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
   let books=[],filtro=TODOS,q="",shown=PAGE,orden="rec",drawn=0,lastG=null,subEd="";
   const NUEVO_DIAS=14;
   const esNuevo=b=>!!b.novedad;
+  let CAMP=null,OF_ACT=false,OFE='Ofertas';
+  const enOferta=b=>OF_ACT&&b.oferta!=null&&b.precio!=null&&b.oferta<b.precio&&b.estado==='disponible';
+  const pr=b=>enOferta(b)?b.oferta:b.precio;
+  const pesos=n=>'$'+n.toLocaleString('es-MX');
+  function fechaLarga(a,b){const M=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    const [y1,m1,d1]=a.split('-').map(Number),[y2,m2,d2]=b.split('-').map(Number);
+    return m1===m2?'del '+d1+' al '+d2+' de '+M[m2-1]:'del '+d1+' de '+M[m1-1]+' al '+d2+' de '+M[m2-1];}
 
   const norm=s=>(s||'').toString().trim();
   const low=s=>norm(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
@@ -605,12 +619,13 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
   function chips(){
     const box=$('chips');box.textContent='';
     const list=[TODOS];
+    if(books.some(enOferta))list.push(OFE);
     if(books.some(esNuevo))list.push(NOV);
     GENEROS.forEach(g=>{if(books.some(b=>b.genero===g))list.push(g);});
     if(books.some(b=>b.serie))list.push(SAGA);
     if(books.some(b=>b.editorial))list.push(EDIT);
     if(!list.includes(filtro))filtro=TODOS;
-    list.forEach(g=>{const b=el('button','chip'+(g===NOV?' chip-nov':''),g);b.type='button';b.setAttribute('aria-pressed',g===filtro);
+    list.forEach(g=>{const b=el('button','chip'+(g===NOV||g===OFE?' chip-nov':''),g);b.type='button';b.setAttribute('aria-pressed',g===filtro);
       b.onclick=()=>{filtro=g;shown=PAGE;subEd='';[...box.children].forEach(c=>c.setAttribute('aria-pressed',c.textContent===g));render();};box.appendChild(b);});
   }
   $('q').addEventListener('input',e=>{q=e.target.value.trim();shown=PAGE;render();});
@@ -651,12 +666,12 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     $('can-foot').hidden=!its.length;
     its.forEach(b=>{const r=el('div','ci');
       const t0=thumbOf(b);if(t0){const i=new Image();i.src=t0;i.alt='';i.decoding='async';r.appendChild(i);}else r.appendChild(el('div','noimg'));
-      const t=el('div');t.appendChild(el('div','t',b.titulo));t.appendChild(el('div','s',[b.autor,fmt(b.precio)].filter(Boolean).join(' · ')));r.appendChild(t);
+      const t=el('div');t.appendChild(el('div','t',b.titulo));t.appendChild(el('div','s',[b.autor,fmt(pr(b))+(enOferta(b)?' · '+OFE.toLowerCase()+' (antes '+pesos(b.precio)+')':'')].filter(Boolean).join(' · ')));r.appendChild(t);
       const q=el('button','q','quitar');q.type='button';q.onclick=()=>toggle(b.id);r.appendChild(q);box.appendChild(r);});
-    const tot=its.reduce((a,b)=>a+(b.precio||0),0),cons=its.some(b=>b.precio==null);
+    const tot=its.reduce((a,b)=>a+(pr(b)||0),0),cons=its.some(b=>b.precio==null);
     $('cart-total').textContent='$'+tot.toLocaleString('es-MX')+' MXN';$('cart-cons').hidden=!cons;
     const ent=(document.querySelector('input[name="entrega"]:checked')||{}).value||'';
-    const msg='Hola, quiero comprar estos libros de Las flores del mal:\n\n'+its.map((b,i)=>(i+1)+'. «'+b.titulo+'»'+(b.autor?' — '+b.autor:'')+(b.editorial?' ('+b.editorial+')':'')+' — '+(b.precio!=null?'$'+b.precio.toLocaleString('es-MX'):'precio a consultar')).join('\n')+
+    const msg='Hola, quiero comprar estos libros de Las flores del mal:\n\n'+its.map((b,i)=>(i+1)+'. «'+b.titulo+'»'+(b.autor?' — '+b.autor:'')+(b.editorial?' ('+b.editorial+')':'')+' — '+(b.precio!=null?pesos(pr(b))+(enOferta(b)?' (oferta '+OFE+', antes '+pesos(b.precio)+')':''):'precio a consultar')).join('\n')+
       '\n\nTotal: $'+tot.toLocaleString('es-MX')+' MXN'+(cons?' + libros con precio a consultar':'')+'\nEntrega: '+ent+'\n\n¿Me pasan los datos para pagar?';
     const c=$('cart-go');c.href=WA+'?text='+encodeURIComponent(msg);c.setAttribute('aria-disabled',its.length?'false':'true');
   }
@@ -675,11 +690,13 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     const strip=$('f-th');strip.textContent='';strip.hidden=fotos.length<2;
     fotos.forEach((u,i)=>{const t=el('button','f-mini'+(i?'':' on'));t.type='button';t.setAttribute('aria-label','Foto '+(i+1));
       const im=new Image();im.src=th[i]||u;im.alt='';t.appendChild(im);t.onclick=()=>{big.src=u;[...strip.children].forEach(c=>c.classList.toggle('on',c===t));};strip.appendChild(t);});
-    $('f-eyebrow').textContent=[b.novedad?'novedad':'',b.genero].filter(Boolean).join(' · ');
+    $('f-eyebrow').textContent=[enOferta(b)?OFE.toLowerCase():'',b.novedad?'novedad':'',b.genero].filter(Boolean).join(' · ');
     $('f-t').textContent=b.titulo;$('f-au').textContent=b.autor||'';$('f-ed').textContent=b.editorial||'';
     $('f-serie').hidden=!b.serie;$('f-serie').textContent=b.serie?(b.serie+(b.tomo?' · '+(/^\d+$/.test(b.tomo)?'tomo '+b.tomo:b.tomo):'')):'';
     $('f-nota').hidden=!b.nota;$('f-nota').textContent=b.nota||'';
-    $('f-price').textContent=fmt(b.precio);
+    const fp=$('f-price');fp.textContent='';
+    if(enOferta(b)){fp.appendChild(el('s',null,pesos(b.precio)));fp.appendChild(document.createTextNode(fmt(b.oferta)));fp.appendChild(el('span','pct','-'+Math.round((1-b.oferta/b.precio)*100)+'% · '+OFE.toLowerCase()));}
+    else fp.textContent=fmt(b.precio);
     const act=$('f-act');act.textContent='';
     if(b.estado==='disponible'){const inC=cart.includes(b.id);const w=el('button','comprar',inC?'en su canasta ✓ · ver canasta':'Lo quiero');w.type='button';w.onclick=()=>quiero(b);act.appendChild(w);}
     else{const w=el('a','comprar','Apartado · preguntar por WhatsApp');w.href=WA+'?text='+encodeURIComponent('Hola, vi que «'+b.titulo+'» está apartado. ¿Me avisan si se libera?');w.target='_blank';w.rel='noopener';act.appendChild(w);}
@@ -698,6 +715,7 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     const card=el('article','book '+b.estado+(small?' mini':''));
     const cov=el('button','cov');cov.type='button';cov.setAttribute('aria-label','Ver ficha de '+b.titulo);
     if(b.estado==='apartado')cov.appendChild(el('span','badge apartado','apartado'));
+    else if(enOferta(b))cov.appendChild(el('span','badge of','-'+Math.round((1-b.oferta/b.precio)*100)+'%'));
     else if(esNuevo(b)&&!small)cov.appendChild(el('span','badge nov','novedad'));
     const t0=thumbOf(b);
     if(t0){const img=new Image();img.alt='';img.loading='lazy';img.decoding='async';img.width=300;img.height=400;img.src=t0;
@@ -707,20 +725,23 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
     const t=el('h3');const tb=el('button','tlink',b.titulo);tb.type='button';tb.onclick=()=>openFicha(b);t.appendChild(tb);card.appendChild(t);
     if(b.serie&&!small)card.appendChild(el('div','serie',b.serie+(b.tomo?' · '+(/^\d+$/.test(b.tomo)?'t. '+b.tomo:b.tomo):'')));
     if(b.autor)card.appendChild(el('div','au',b.autor));
-    const row=el('div','row-p');row.appendChild(el('span','price',b.precio!=null?'$'+b.precio.toLocaleString('es-MX'):'a consultar'));
+    const row=el('div','row-p');const ps=el('span','price');if(enOferta(b)){ps.appendChild(el('s',null,pesos(b.precio)));ps.appendChild(document.createTextNode(pesos(b.oferta)));}else ps.textContent=b.precio!=null?pesos(b.precio):'a consultar';row.appendChild(ps);
     if(b.estado==='disponible'&&!small){const inC=cart.includes(b.id);const w=el('button','add'+(inC?' en':''),inC?'✓':'lo quiero');w.type='button';w.title=inC?'Ya está en su canasta':'Agregar a la canasta';w.onclick=()=>quiero(b);row.appendChild(w);}
     card.appendChild(row);
     return card;
   }
   function render(keep){
     const grid=$('grid');if(!keep){grid.textContent='';drawn=0;lastG=null;}
+    // Ofertas
+    const ofs=books.filter(enOferta);const showOf=ofs.length&&filtro===TODOS&&!q;$('of-wrap').hidden=!showOf;
+    if(showOf&&!keep){$('of-h').textContent=OFE;$('of-fechas').textContent='ofertas '+fechaLarga(CAMP.desde,CAMP.hasta);const s=$('of');s.textContent='';ofs.forEach(b=>s.appendChild(card(b,true)));}
     // Novedades
     const nov=books.filter(esNuevo).sort((a,b)=>(b.novedad-a.novedad)||(b.creado-a.creado)).slice(0,12);
     const showShelf=nov.length&&filtro===TODOS&&!q;$('nov-wrap').hidden=!showShelf;
     if(showShelf&&!keep){const s=$('nov');s.textContent='';nov.forEach(b=>s.appendChild(card(b,true)));}
     orden=filtro===EDIT?'ed':'rec';
     pintaSub();
-    let list=books.filter(b=>filtro===TODOS||(filtro===EDIT&&(!subEd||edKey(b)===subEd))||(filtro===NOV&&esNuevo(b))||(filtro===SAGA&&b.serie)||b.genero===filtro);
+    let list=books.filter(b=>filtro===TODOS||(filtro===EDIT&&(!subEd||edKey(b)===subEd))||(filtro===NOV&&esNuevo(b))||(filtro===OFE&&enOferta(b))||(filtro===SAGA&&b.serie)||b.genero===filtro);
     if(q){const k=low(q);list=list.filter(b=>low([b.titulo,b.autor,b.editorial,b.serie].join(' ')).includes(k));}
     if(filtro===SAGA&&orden==='rec')list=list.slice().sort((a,c)=>low(a.serie).localeCompare(low(c.serie))||tomoN(a)-tomoN(c));
     else list=ordenar(list);
@@ -741,13 +762,18 @@ window.__AMAPOLAS__=["img/377e18772e.webp", "img/8340ec08af.webp", "img/3b955468
 
   fetch('libros.json?t='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json();}).then(d=>{
     const arr=Array.isArray(d)?d:(d.libros||[]);
+    const c=!Array.isArray(d)&&d.ofertas;
+    if(c&&c.activa&&/^\d{4}-\d\d-\d\d$/.test(c.desde||'')&&/^\d{4}-\d\d-\d\d$/.test(c.hasta||'')){
+      const n=new Date(),hoy=n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');
+      if(hoy>=c.desde&&hoy<=c.hasta){CAMP=c;OF_ACT=true;OFE=norm(c.nombre)||'Ofertas';}}
     books=arr.map(b=>{
       const fotos=(Array.isArray(b.fotos)&&b.fotos.length?b.fotos:(b.foto?[b.foto]:[])).map(norm).filter(Boolean);
       const thumbs=(Array.isArray(b.thumbs)&&b.thumbs.length?b.thumbs:(b.thumb?[b.thumb]:[])).map(norm);
       return {id:norm(b.id)||norm(b.titulo),titulo:norm(b.titulo),autor:norm(b.autor),editorial:norm(b.editorial),
       precio:(b.precio===''||b.precio==null||isNaN(Number(b.precio)))?null:Number(b.precio),
       genero:genero(b.genero),estado:estado(b.estado),nota:norm(b.nota),fotos,thumbs,
-      novedad:!!b.novedad,serie:norm(b.serie),tomo:norm(b.tomo),creado:b.creado||0};})
+      novedad:!!b.novedad,serie:norm(b.serie),tomo:norm(b.tomo),creado:b.creado||0,
+      oferta:(b.oferta===''||b.oferta==null||isNaN(Number(b.oferta)))?null:Number(b.oferta)};})
       .filter(b=>b.titulo&&b.estado!=='vendido').sort((a,b)=>b.creado-a.creado);
     const cnt={};books.forEach(b=>{const k=edKey(b);if(!k)return;const n=edName(b.editorial);(cnt[k]=cnt[k]||{})[n]=(cnt[k][n]||0)+1;});
     Object.keys(cnt).forEach(k=>{edLabel[k]=Object.entries(cnt[k]).sort((a,b)=>b[1]-a[1])[0][0];});

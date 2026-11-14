@@ -112,6 +112,24 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
 .tab{font-family:var(--sc);letter-spacing:.14em;text-transform:lowercase;font-size:1.1rem;background:none;border:1px solid transparent;border-bottom:0;padding:.55rem 1.3rem;color:var(--gris);cursor:pointer}
 .tab[aria-selected="true"]{background:var(--vino);color:#fff}
 .tab:hover:not([aria-selected="true"]){color:var(--vino)}
+.of-camp{margin-bottom:1rem}
+.of-fechas{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.of-masivo{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;background:var(--papel-2);border:1px solid var(--linea);padding:.7rem .9rem}
+.of-masivo input{width:4.5rem}.of-masivo select{width:auto}
+.of-nota{margin:.4rem 0 1rem}
+.of-todos{margin-left:auto;align-items:center}.of-todos>span{white-space:nowrap}
+.of-row{display:grid;grid-template-columns:1.4rem 2.6rem minmax(0,1fr) auto;gap:.8rem;align-items:center;padding:.55rem 0;border-top:1px solid var(--linea)}
+.of-row>input[type=checkbox]{width:1.15rem;height:1.15rem;accent-color:var(--vino)}
+.of-row img,.of-row .noimg{width:2.6rem;aspect-ratio:3/4;object-fit:cover;background:var(--papel-2);border:1px solid var(--linea)}
+.of-row .t{font-weight:600;line-height:1.2}.of-row .s{color:var(--gris);font-size:.95rem}
+.of-p{display:flex;align-items:center;gap:.4rem;justify-content:flex-end}
+.of-p input{width:6.2rem;padding:.3rem .5rem}
+.of-p .pct{font-family:var(--sc);letter-spacing:.06em;color:var(--vino);min-width:3.2rem;font-size:.95rem}
+.of-p .x{background:none;border:0;color:var(--gris);cursor:pointer;font-size:1.2rem;padding:0 .2rem}
+.of-row.cambio{background:linear-gradient(90deg,rgba(139,15,30,.06),transparent)}
+.of-row.malo input[type=number]{border-color:var(--vino);background:#fff3f3}
+.of-barra{position:sticky;bottom:0;background:#fff;padding:.8rem 0;border-top:1px solid var(--linea);margin-top:0;z-index:2}
+@media (max-width:560px){.of-row{grid-template-columns:1.4rem 2.4rem minmax(0,1fr)}.of-p{grid-column:3;justify-content:flex-start}.of-todos{margin-left:0}.of-fechas{grid-template-columns:1fr}}
 .h-textos{display:grid;grid-template-columns:1fr 1fr;gap:.6rem .9rem}
 @media (max-width:560px){.h-textos{grid-template-columns:1fr}}
 .h-wrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:1.5rem;align-items:start}
@@ -140,7 +158,7 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
 <body>
 <header><div class="wrap"><h1>La bodega</h1><span class="hstat" id="hstat"></span><button class="xls" id="xls" type="button">descargar inventario (Excel)</button><a href="./" target="_blank" rel="noopener">página pública ↗</a></div></header>
 <main class="wrap">
-  <div class="tabs" role="tablist"><button class="tab" role="tab" id="tab-subir" aria-selected="true" type="button">Subir libro</button><button class="tab" role="tab" id="tab-inv" aria-selected="false" type="button">Inventario <span id="tab-n"></span></button><button class="tab" role="tab" id="tab-hist" aria-selected="false" type="button">Historia IG</button></div>
+  <div class="tabs" role="tablist"><button class="tab" role="tab" id="tab-subir" aria-selected="true" type="button">Subir libro</button><button class="tab" role="tab" id="tab-inv" aria-selected="false" type="button">Inventario <span id="tab-n"></span></button><button class="tab" role="tab" id="tab-of" aria-selected="false" type="button">Ofertas</button><button class="tab" role="tab" id="tab-hist" aria-selected="false" type="button">Historia IG</button></div>
 
   <section class="card" id="llave">
     <h2>Llave de acceso</h2>
@@ -213,6 +231,35 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
     <div class="list" id="lista"><p class="msg">Cargando…</p></div>
     <div class="pager" id="pager" hidden><button class="btn small" id="prev" type="button">← anteriores</button><span class="msg" id="pag"></span><button class="btn small" id="next" type="button">siguientes →</button></div>
   </section>
+  <section class="card" id="ofertas" hidden>
+    <h2>Ofertas</h2>
+    <p class="hint">Ponga precio de oferta a los libros que quiera. En la página pública se ven con el precio normal tachado, en una repisa propia y en una pestaña, <b>solo entre las fechas que elija</b>; al terminar desaparecen solas y vuelven los precios normales.</p>
+    <div class="grid of-camp">
+      <label><span>nombre de la temporada</span><input id="of-nombre" maxlength="30" autocomplete="off" placeholder="Buen Fin"></label>
+      <div class="of-fechas"><label><span>desde</span><input id="of-desde" type="date"></label><label><span>hasta</span><input id="of-hasta" type="date"></label></div>
+      <label class="chk full"><input type="checkbox" id="of-activa"><span><b>Mostrar las ofertas en la página</b><small id="of-estado"></small></span></label>
+    </div>
+    <div class="of-masivo">
+      <span>Descuento de</span><input id="of-pct" type="number" min="1" max="90" step="1" value="15" inputmode="numeric" aria-label="Porcentaje de descuento"><span>% a</span>
+      <select id="of-a" aria-label="A qué libros"><option value="marcados">los libros marcados</option><option value="vista">todos los de la lista de abajo</option></select>
+      <button class="btn small vino" id="of-aplicar" type="button">aplicar</button>
+      <button class="btn small" id="of-quitar" type="button">quitar oferta a los marcados</button>
+    </div>
+    <p class="msg of-nota">El descuento se redondea a múltiplos de $5. También puede escribir el precio de oferta a mano en cada libro.</p>
+    <div class="list-tools">
+      <input id="of-buscar" type="search" placeholder="Buscar título, autor, editorial…" aria-label="Buscar">
+      <select id="of-ver" aria-label="Mostrar"><option value="">Todos</option><option value="con">Con oferta</option><option value="sin">Sin oferta</option></select>
+      <select id="of-ed" aria-label="Editorial"><option value="">Todas las editoriales</option></select>
+      <label class="chk of-todos"><input type="checkbox" id="of-todos"><span>marcar todos</span></label>
+    </div>
+    <div class="list" id="of-lista"></div>
+    <div class="actions of-barra">
+      <button class="btn vino" id="of-guardar" type="button">Guardar ofertas</button>
+      <button class="btn" id="of-descartar" type="button" hidden>descartar cambios</button>
+      <span class="msg" id="of-msg" role="status"></span>
+    </div>
+  </section>
+
   <section class="card" id="historias" hidden>
     <h2>Historia para Instagram</h2>
     <p class="hint">Elija los libros (hasta 15) en el orden en que quiere que salgan. La historia los muestra uno por uno, como si se pasaran las hojas de un libro, y se descarga como video para subirlo a Instagram.</p>
@@ -278,29 +325,32 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
   }
 
   /* Leer la lista */
+  let meta={};
+  function sacarMeta(d){if(!d||Array.isArray(d))return {};const m=Object.assign({},d);delete m.libros;return m;}
   async function leerRemoto(){
     const f=await gh('/contents/libros.json?ref='+BRANCH+'&t='+Date.now());
-    if(!f)return [];const d=JSON.parse(unb64(f.content));return Array.isArray(d)?d:(d.libros||[]);
+    if(!f){meta={};return [];}const d=JSON.parse(unb64(f.content));meta=sacarMeta(d);return Array.isArray(d)?d:(d.libros||[]);
   }
   async function cargar(){
     if(token){libros=await leerRemoto();}
-    else{try{const r=await fetch('libros.json?t='+Date.now(),{cache:'no-store'});const d=r.ok?await r.json():[];libros=Array.isArray(d)?d:(d.libros||[]);}catch(e){libros=[];}}
+    else{try{const r=await fetch('libros.json?t='+Date.now(),{cache:'no-store'});const d=r.ok?await r.json():[];meta=sacarMeta(d);libros=Array.isArray(d)?d:(d.libros||[]);}catch(e){libros=[];}}
     pintar();
   }
 
   /* Guardar: un solo cambio en GitHub con fotos + lista (y borrar fotos viejas) */
-  async function commit(cambiar,mensaje,archivos,borrar){
+  async function commit(cambiar,mensaje,archivos,borrar,cambiarMeta){
     for(let intento=0;intento<2;intento++){
       const ref=await gh('/git/ref/heads/'+BRANCH);const base=ref.object.sha;
       const com=await gh('/git/commits/'+base);
       const actual=await leerRemoto();
       const nueva=cambiar(actual.map(x=>Object.assign({},x)));
+      const metaNueva=cambiarMeta?cambiarMeta(JSON.parse(JSON.stringify(meta))):meta;
       const tree=[];
       for(const a of (archivos||[])){
         const bl=await gh('/git/blobs',{method:'POST',body:JSON.stringify({content:a.b64,encoding:'base64'})});
         tree.push({path:a.path,mode:'100644',type:'blob',sha:bl.sha});
       }
-      const js=await gh('/git/blobs',{method:'POST',body:JSON.stringify({content:utf8b64(JSON.stringify({libros:nueva},null,2)),encoding:'base64'})});
+      const js=await gh('/git/blobs',{method:'POST',body:JSON.stringify({content:utf8b64(JSON.stringify(Object.assign({libros:nueva},metaNueva),null,2)),encoding:'base64'})});
       tree.push({path:'libros.json',mode:'100644',type:'blob',sha:js.sha});
       const enUso=new Set();nueva.forEach(b=>{fotosDe(b).forEach(p=>enUso.add(p));thumbsDe(b).forEach(p=>enUso.add(p));});
       (borrar||[]).filter(p=>p&&/^fotos\//.test(p)&&!enUso.has(p)).forEach(p=>tree.push({path:p,mode:'100644',type:'blob',sha:null}));
@@ -309,7 +359,7 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
       catch(e){ // si alguna foto a borrar ya no existe, reintenta sin borrar
         if(e.status===422){t=await gh('/git/trees',{method:'POST',body:JSON.stringify({base_tree:com.tree.sha,tree:tree.filter(x=>x.sha!==null)})});}else throw e;}
       const nc=await gh('/git/commits',{method:'POST',body:JSON.stringify({message:mensaje,tree:t.sha,parents:[base]})});
-      try{await gh('/git/refs/heads/'+BRANCH,{method:'PATCH',body:JSON.stringify({sha:nc.sha})});libros=nueva;return;}
+      try{await gh('/git/refs/heads/'+BRANCH,{method:'PATCH',body:JSON.stringify({sha:nc.sha})});libros=nueva;meta=metaNueva;return;}
       catch(e){if(e.status===422&&intento===0)continue;throw e;}
     }
   }
@@ -426,7 +476,7 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
         creado:editing?editing.creado:Date.now()};
       const viejas=editing?[...fotosDe(editing),...thumbsDe(editing)]:[];
       say('Guardando en la página…');
-      await commit(L=>{const i=L.findIndex(x=>x.id===id);if(i>=0)L[i]=d;else L.push(d);return L;},(editing?'Editado: ':'Nuevo: ')+titulo,archivos,viejas);
+      await commit(L=>{const i=L.findIndex(x=>x.id===id);if(i>=0){if(L[i].oferta!=null&&L[i].oferta!=='')d.oferta=L[i].oferta;L[i]=d;}else L.push(d);return L;},(editing?'Editado: ':'Nuevo: ')+titulo,archivos,viejas);
       limpiar();
     },editing?'Cambios guardados.':'Libro publicado.');
     btn.disabled=false;if(!ok&&!$('msg').classList.contains('err'))say('');
@@ -434,8 +484,8 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
 
 
   /* Pestañas */
-  function tab(t){['subir','inv','hist'].forEach(k=>$('tab-'+k).setAttribute('aria-selected',k===t));$('nuevo').hidden=t!=='subir';$('vitrina').hidden=t!=='inv';$('historias').hidden=t!=='hist';if(t==='hist'){hPintarSel();hPortada();}scrollTo({top:0});}
-  $('tab-subir').onclick=()=>tab('subir');$('tab-inv').onclick=()=>tab('inv');$('tab-hist').onclick=()=>tab('hist');
+  function tab(t){['subir','inv','of','hist'].forEach(k=>$('tab-'+k).setAttribute('aria-selected',k===t));$('nuevo').hidden=t!=='subir';$('vitrina').hidden=t!=='inv';$('historias').hidden=t!=='hist';$('ofertas').hidden=t!=='of';if(t==='of')ofPintar(true);if(t==='hist'){hPintarSel();hPortada();}scrollTo({top:0});}
+  $('tab-subir').onclick=()=>tab('subir');$('tab-inv').onclick=()=>tab('inv');$('tab-hist').onclick=()=>tab('hist');$('tab-of').onclick=()=>tab('of');
   let pagina=0;const POR=15;
   $('prev').onclick=()=>{pagina--;pintar();$('vitrina').scrollIntoView();};$('next').onclick=()=>{pagina++;pintar();$('vitrina').scrollIntoView();};
   /* ---------- Lista ---------- */
@@ -467,7 +517,7 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
       const s=document.createElement('div');s.className='s';s.textContent=[b.autor,b.editorial,(b.precio!=null&&b.precio!=='')?'$'+b.precio:'precio a consultar'].filter(Boolean).join(' · ');
       const tags=document.createElement('div');tags.className='tags';
       const tg=(x,c)=>{const e=document.createElement('span');e.className='tg'+(c?' '+c:'');e.textContent=x;tags.appendChild(e);};
-      if(b.novedad)tg('novedad','n');if(b.serie)tg(b.serie+(b.tomo?' · '+b.tomo:''));if(fotosDe(b).length>1)tg(fotosDe(b).length+' fotos');tg(b.genero||'Otros');
+      if(b.novedad)tg('novedad','n');if(b.oferta!=null&&b.oferta!=='')tg('oferta $'+b.oferta,'n');if(b.serie)tg(b.serie+(b.tomo?' · '+b.tomo:''));if(fotosDe(b).length>1)tg(fotosDe(b).length+' fotos');tg(b.genero||'Otros');
       info.append(t,s,tags);row.appendChild(info);
       const ctl=document.createElement('div');ctl.className='ctl';
       const sel=document.createElement('select');sel.setAttribute('aria-label','Estado de '+b.titulo);
@@ -501,12 +551,12 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
       const filas=L.map((b,i)=>({'#':i+1,'Título':b.titulo||'','Autor':b.autor||'','Editorial':edCanon(b.editorial),'Género':b.genero||'',
         'Saga / obra':b.serie||'','Tomo':b.tomo||'','Precio (MXN)':(b.precio==null||b.precio==='')?'':Number(b.precio),'Estado':b.estado==='apartado'?'Apartado':'Disponible',
         'Novedad':b.novedad?'Sí':'','Nota':b.nota||'','Fecha de alta':b.creado?new Date(b.creado).toLocaleDateString('es-MX'):'',
-        'Vendido en feria (✓)':'','Precio cobrado':'','Forma de pago':''}));
+        'Vendido en feria (✓)':'','Precio cobrado':'','Forma de pago':'','Precio de oferta':(b.oferta==null||b.oferta==='')?'':Number(b.oferta)}));
       const ws=XLSX.utils.json_to_sheet(filas);
       const n=filas.length+1;
       XLSX.utils.sheet_add_aoa(ws,[[],['','Total de libros',filas.length,'','','','','Valor del inventario',{f:'SUM(H2:H'+n+')'}],['','Vendidos en feria',{f:'COUNTA(M2:M'+n+')'},'','','','','Total cobrado en feria',{f:'SUM(N2:N'+n+')'}]],{origin:-1});
-      ws['!cols']=[4,38,26,20,20,22,8,12,11,9,30,12,16,14,16].map(w=>({wch:w}));
-      ws['!autofilter']={ref:'A1:O'+n};ws['!freeze']={xSplit:0,ySplit:1};
+      ws['!cols']=[4,38,26,20,20,22,8,12,11,9,30,12,16,14,16,15].map(w=>({wch:w}));
+      ws['!autofilter']={ref:'A1:P'+n};ws['!freeze']={xSplit:0,ySplit:1};
       const gen={};L.forEach(b=>{const g=b.genero||'Otros';gen[g]=gen[g]||{n:0,v:0};gen[g].n++;gen[g].v+=Number(b.precio)||0;});
       const ws2=XLSX.utils.aoa_to_sheet([['Género','Libros','Valor (MXN)'],...Object.entries(gen).sort().map(([g,o])=>[g,o.n,o.v]),[],['Total',L.length,L.reduce((a,b)=>a+(Number(b.precio)||0),0)]]);
       ws2['!cols']=[{wch:32},{wch:10},{wch:14}];
@@ -541,6 +591,80 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
       if(!(j.permissions&&j.permissions.push))throw 0;setTok(t);$('token').value='';showKey();await cargar();}
     catch(e){token='';$('msg-llave').textContent='Esa llave no tiene permiso de escritura en el repositorio. Revise los pasos.';}};
   $('olvidar').onclick=()=>{setTok('');token='';showKey();pintar();};
+
+  /* ---------- Ofertas (Buen Fin, etc.) ---------- */
+  const OF_DEF={nombre:'Buen Fin',desde:'2026-11-13',hasta:'2026-11-17',activa:true};
+  let ofDraft={},ofMarcados=new Set();
+  const hoyISO=()=>{const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');};
+  function ofVigente(){const c=meta.ofertas;if(!c||!c.activa||!c.desde||!c.hasta)return false;const h=hoyISO();return h>=c.desde&&h<=c.hasta;}
+  function ofFecha(iso){const M=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];const [y,m,d]=(iso||'').split('-').map(Number);return d?d+' de '+M[m-1]:'';}
+  const numOf=v=>(v===''||v==null||isNaN(Number(v)))?null:Number(v);
+  const ofDe=b=>(b.id in ofDraft)?ofDraft[b.id]:numOf(b.oferta);
+  function ofCamp(){return {nombre:$('of-nombre').value.trim()||'Ofertas',desde:$('of-desde').value,hasta:$('of-hasta').value,activa:$('of-activa').checked};}
+  function ofCampCambio(){const a=ofCamp(),b=Object.assign({},OF_DEF,meta.ofertas||{});return !meta.ofertas||['nombre','desde','hasta','activa'].some(k=>a[k]!==b[k]);}
+  function ofEstado(){const c=ofCamp(),h=hoyISO(),e=$('of-estado');
+    if(!c.desde||!c.hasta||c.hasta<c.desde){e.textContent='Revise las fechas: «hasta» debe ser igual o posterior a «desde».';return;}
+    if(!c.activa){e.textContent='Apagadas: aunque tengan precio de oferta, en la página se ven los precios normales.';return;}
+    e.textContent=h<c.desde?'Se verán en la página del '+ofFecha(c.desde)+' al '+ofFecha(c.hasta)+'.':h>c.hasta?'Ya terminaron (el '+ofFecha(c.hasta)+'). En la página se ven los precios normales.':'Se ven en la página ahora mismo, hasta el '+ofFecha(c.hasta)+' (incluido).';}
+  function ofMalos(){return libros.filter(b=>{const o=ofDe(b);return b.estado!=='vendido'&&o!=null&&!(b.precio!=null&&b.precio!==''&&o>0&&o<Number(b.precio));}).length;}
+  function ofBarra(){const nd=Object.keys(ofDraft).length,n=nd+(ofCampCambio()?1:0),malos=ofMalos();
+    $('of-guardar').disabled=!token||!n;$('of-descartar').hidden=!nd;
+    const conOf=libros.filter(b=>b.estado!=='vendido'&&ofDe(b)!=null).length;
+    $('of-msg').textContent=!token?'Ponga la llave para poder guardar.':malos?malos+(malos===1?' libro tiene':' libros tienen')+' un precio de oferta que no es menor al normal.':(n?n+(n===1?' cambio sin guardar':' cambios sin guardar')+' · ':'')+conOf+(conOf===1?' libro en oferta':' libros en oferta');}
+  function ofLista(){const k=$('of-buscar').value.trim().toLowerCase(),v=$('of-ver').value,e=$('of-ed').value;
+    return [...libros].filter(b=>b.estado!=='vendido').filter(b=>!e||edKey(b.editorial)===e).filter(b=>v===''||(v==='con'?ofDe(b)!=null:ofDe(b)==null))
+      .filter(b=>!k||[b.titulo,b.autor,b.editorial,b.serie].join(' ').toLowerCase().includes(k))
+      .sort((a,b)=>(a.titulo||'').localeCompare(b.titulo||'','es'));}
+  function ofPintar(inicio){
+    if(inicio){const c=Object.assign({},OF_DEF,meta.ofertas||{});$('of-nombre').value=c.nombre;$('of-desde').value=c.desde;$('of-hasta').value=c.hasta;$('of-activa').checked=!!c.activa;
+      const se=$('of-ed'),ve=se.value;se.length=1;editoriales().forEach(x=>{const o=document.createElement('option');o.value=x.k;o.textContent=x.nombre+' ('+x.n+')';se.appendChild(o);});se.value=ve;}
+    ofEstado();
+    const L=ofLista(),box=$('of-lista');box.textContent='';
+    if(!L.length){const p=document.createElement('p');p.className='msg';p.textContent='No hay libros que coincidan.';box.appendChild(p);}
+    L.forEach(b=>{const r=document.createElement('div');r.className='of-row';
+      const ck=document.createElement('input');ck.type='checkbox';ck.checked=ofMarcados.has(b.id);ck.setAttribute('aria-label','Marcar '+b.titulo);
+      ck.onchange=()=>{ck.checked?ofMarcados.add(b.id):ofMarcados.delete(b.id);$('of-todos').checked=L.every(x=>ofMarcados.has(x.id));};r.appendChild(ck);
+      const tf=thumbsDe(b)[0]||fotosDe(b)[0];if(tf){const i=new Image();i.src=tf;i.alt='';i.loading='lazy';r.appendChild(i);}else{const d=document.createElement('div');d.className='noimg';r.appendChild(d);}
+      const info=document.createElement('div');const t=document.createElement('div');t.className='t';t.textContent=b.titulo;
+      const s=document.createElement('div');s.className='s';const sinP=b.precio==null||b.precio==='';
+      s.textContent=[b.autor,edCanon(b.editorial),sinP?'sin precio: no puede llevar oferta':'precio normal $'+Number(b.precio).toLocaleString('es-MX')].filter(Boolean).join(' · ');info.append(t,s);r.appendChild(info);
+      const pz=document.createElement('div');pz.className='of-p';
+      const inp=document.createElement('input');inp.type='number';inp.min='1';inp.step='1';inp.inputMode='numeric';inp.placeholder='oferta $';inp.disabled=sinP;inp.setAttribute('aria-label','Precio de oferta de '+b.titulo);
+      const pct=document.createElement('span');pct.className='pct';
+      const x=document.createElement('button');x.type='button';x.className='x';x.textContent='×';x.title='Quitar oferta';x.setAttribute('aria-label','Quitar oferta de '+b.titulo);
+      const pintaFila=()=>{const o=ofDe(b);if(document.activeElement!==inp)inp.value=o==null?'':o;
+        const bien=o==null||(!sinP&&o>0&&o<Number(b.precio));pct.textContent=o!=null&&bien&&!sinP?'-'+Math.round((1-o/Number(b.precio))*100)+'%':'';
+        r.classList.toggle('malo',!bien);r.classList.toggle('cambio',b.id in ofDraft);x.hidden=o==null;};
+      const fijar=v=>{const orig=numOf(b.oferta);if(v===orig)delete ofDraft[b.id];else ofDraft[b.id]=v;pintaFila();ofBarra();};
+      inp.oninput=()=>fijar(numOf(inp.value)==null?null:Math.round(Number(inp.value)));
+      x.onclick=()=>{inp.value='';fijar(null);};
+      pz.append(inp,pct,x);r.appendChild(pz);pintaFila();box.appendChild(r);});
+    $('of-todos').checked=L.length>0&&L.every(x=>ofMarcados.has(x.id));
+    ofBarra();
+  }
+  ['of-nombre','of-desde','of-hasta'].forEach(id=>$(id).addEventListener('input',()=>{ofEstado();ofBarra();}));
+  $('of-activa').onchange=()=>{ofEstado();ofBarra();};
+  ['of-buscar','of-ver','of-ed'].forEach(id=>$(id).addEventListener('input',()=>ofPintar()));
+  $('of-todos').onchange=()=>{const on=$('of-todos').checked;ofLista().forEach(b=>on?ofMarcados.add(b.id):ofMarcados.delete(b.id));ofPintar();};
+  $('of-aplicar').onclick=()=>{const p=Number($('of-pct').value);if(!(p>0&&p<=90)){toast('Escriba un porcentaje entre 1 y 90.');return;}
+    const vista=$('of-a').value==='vista',objetivo=vista?ofLista():libros.filter(b=>ofMarcados.has(b.id)&&b.estado!=='vendido');
+    if(!objetivo.length){toast(vista?'No hay libros en la lista.':'Primero marque los libros (casilla de la izquierda).');return;}
+    let n=0,sin=0;objetivo.forEach(b=>{if(b.precio==null||b.precio===''){sin++;return;}const P=Number(b.precio);let o=Math.round(P*(1-p/100)/5)*5;if(o>=P)o=Math.floor((P-1)/5)*5;if(o<=0)return;
+      if(o===numOf(b.oferta))delete ofDraft[b.id];else ofDraft[b.id]=o;n++;});
+    ofPintar();toast(n+(n===1?' libro':' libros')+' con '+p+'% de descuento'+(sin?' ('+sin+' sin precio no se tocaron)':'')+'. Falta pulsar «Guardar ofertas».');};
+  $('of-quitar').onclick=()=>{const L=libros.filter(b=>ofMarcados.has(b.id));if(!L.length){toast('Primero marque los libros.');return;}
+    L.forEach(b=>{if(numOf(b.oferta)==null)delete ofDraft[b.id];else ofDraft[b.id]=null;});ofPintar();};
+  $('of-descartar').onclick=()=>{ofDraft={};ofPintar();};
+  $('of-guardar').onclick=()=>{
+    if(!token)return;const c=ofCamp();
+    if(!c.desde||!c.hasta||c.hasta<c.desde){toast('Revise las fechas de la temporada.');return;}
+    if(ofMalos()){toast('Hay precios de oferta que no son menores al precio normal. Corríjalos o quítelos.');return;}
+    const cambios=Object.assign({},ofDraft);
+    accion(async()=>{
+      await commit(L=>L.map(x=>{if(x.id in cambios){if(cambios[x.id]==null)delete x.oferta;else x.oferta=cambios[x.id];}return x;}),
+        'Ofertas '+c.nombre+': '+Object.keys(cambios).length+' libro(s)',null,null,m=>{m.ofertas=c;return m;});
+      ofDraft={};ofPintar(true);
+    },'Ofertas guardadas.','lista');};
 
   /* ---------- Historias para Instagram ---------- */
   const HW=1080,HH=1920,VINO='#8b0f1e',TINTA='#141012',GRIS='#5d5458';
@@ -623,9 +747,15 @@ code{font-size:.9em;background:var(--papel-2);padding:0 .25rem}
     L.forEach(l=>{hTexto(l,540,y,'600 50px "EB Garamond"',TINTA,al);y+=58;});
     if(b.autor){hTexto(b.autor,540,y+4,'italic 400 40px "EB Garamond"',GRIS,al);y+=54;}
     const ed=edCanon(b.editorial);if(ed){hTexto(ed.toLowerCase(),540,y+4,'500 32px "Cormorant SC"',VINO,al,4);y+=50;}
-    const pr=(b.precio!=null&&b.precio!=='')?'$'+Number(b.precio).toLocaleString('es-MX')+' MXN':'precio a consultar';
-    hx.save();hx.globalAlpha*=al;hx.font='500 38px "EB Garamond"';const w=hx.measureText(pr).width+60;hx.fillStyle=VINO;hx.fillRect(540-w/2,y+8,w,62);hx.restore();
-    hTexto(pr,540,y+52,'500 38px "EB Garamond"','#fff',al);}
+    const ofv=ofVigente()&&b.oferta!=null&&b.oferta!==''&&b.precio!=null&&Number(b.oferta)<Number(b.precio);
+    const pr=ofv?'$'+Number(b.oferta).toLocaleString('es-MX')+' MXN':(b.precio!=null&&b.precio!=='')?'$'+Number(b.precio).toLocaleString('es-MX')+' MXN':'precio a consultar';
+    hx.save();hx.globalAlpha*=al;hx.font='500 38px "EB Garamond"';const w=hx.measureText(pr).width+60;
+    let cx=540;
+    if(ofv){const an='$'+Number(b.precio).toLocaleString('es-MX');hx.font='400 36px "EB Garamond"';const wa=hx.measureText(an).width;cx=540+(wa+24)/2;
+      const ax=cx-w/2-24-wa;hx.fillStyle=GRIS;hx.textAlign='left';hx.fillText(an,ax,y+51);hx.fillRect(ax-2,y+38,wa+4,2.5);}
+    hx.fillStyle=VINO;hx.fillRect(cx-w/2,y+8,w,62);hx.restore();
+    hTexto(pr,cx,y+52,'500 38px "EB Garamond"','#fff',al);
+    if(ofv)hTexto((meta.ofertas.nombre||'oferta').toLowerCase(),540,y+112,'500 30px "Cormorant SC"',VINO,al,4);}
   function hFrame(t,bs){
     const n=bs.length,dur=hDur();hx.setTransform(1,0,0,1,0,0);hx.globalAlpha=1;
     hx.fillStyle='#fffdfb';hx.fillRect(0,0,HW,HH);
