@@ -1496,5 +1496,11 @@
       "tomo": "",
       "creado": 1794455490756
     }
-  ]
+  ],
+  "ofertas": {
+    "nombre": "Nuestro Buen Fin",
+    "desde": "2026-11-17",
+    "hasta": "2026-11-30",
+    "activa": true
+  }
 }
